@@ -7,14 +7,37 @@ App({
     wx.setStorageSync('logs', logs)
 
     // 登录
+    
+  },
+  
+  globalData: {
+    requestPrefix: 'https://mini.luqinwenda.com/api/',
+    userInfo: null,
+    sessionKey: ''
+  },
+  loginPromise: new Promise(function(resolve){
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        var app = getApp()
         console.log("Login info:", res)
+        var loginUrl = app.globalData.requestPrefix + 'MiniAppHelper/Login/' + encodeURIComponent(res.code)
+        wx.request({
+          url: loginUrl,
+          method: 'get',
+          success:(res)=>{
+            console.log("Login api info:", res)
+            app.globalData.sessionKey = res.data.sessionKey
+            app.globalData.userInfo = {}
+            app.globalData.userInfo.user_id = res.data.user_id
+            app.globalData.original_id = res.data.original_id
+            resolve({sessionKey: res.data.sessionKey})
+          }
+        })
       }
     })
-  },
-  globalData: {
-    userInfo: null
-  }
+   
+      
+    
+  })
 })

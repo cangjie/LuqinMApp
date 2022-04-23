@@ -18,6 +18,9 @@ Page({
     })
   },
   onLoad() {
+    wx.navigateTo({
+      url: '../customer/index/index'
+    })
     if (wx.getUserProfile) {
       this.setData({
         canIUseGetUserProfile: true
