@@ -1,0 +1,5 @@
+<!--pages/customer/index/index.wxml-->
+<mp-cells title="test">
+  <mp-cell>bbb</mp-cell>
+  <mp-cell>ccc</mp-cell>
+</mp-cells>
