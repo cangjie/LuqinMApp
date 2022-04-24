@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "mp-tabbar": "weui-miniprogram/tabbar/tabbar",
+    "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar"
+  }
+}

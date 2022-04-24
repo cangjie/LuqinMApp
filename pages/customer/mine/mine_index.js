@@ -1,4 +1,4 @@
-// pages/customer/index/index.js
+// pages/customer/mine/mine_index.js
 const app = getApp()
 Page({
 
@@ -6,8 +6,7 @@ Page({
    * Page initial data
    */
   data: {
-    sessionKey: '',
-    tabCurrentIndex: 0,
+    tabCurrentIndex: 2,
     tabBar:{}
   },
 
@@ -20,7 +19,6 @@ Page({
       console.log(resolve)
       that.setData({tabBar: app.globalData.userTabBar})
     })
-    
   },
 
   /**
@@ -71,11 +69,6 @@ Page({
   onShareAppMessage: function () {
 
   },
-  gotoNext: function(){
-    wx.navigateTo({
-      url: 'http://mp.weixin.qq.com/s?__biz=MzA3MTM1OTIwNg==&mid=2654310676&idx=1&sn=34b67a6623d889e2a10911b1d7fa8dfc&chksm=84effe9db398778b39d405e005426525d8c42417ecc842b0e2f716c6a710b5a558630fffee29#rd',
-    })
-  },
   tabSwitch: function(e){
     console.log('TabSwitch:', e)
     var url = e.detail.item.pagePath
@@ -83,5 +76,4 @@ Page({
       url: url
     })
   }
-
 })

@@ -1,5 +1,7 @@
 <!--pages/customer/index/index.wxml-->
+<mp-navigation-bar title="卢老师的文章" loading="" back="" ></mp-navigation-bar>
 <mp-cells title="test">
   <mp-cell>bbb</mp-cell>
   <mp-cell>ccc</mp-cell>
 </mp-cells>
+<mp-tabbar style="position:fixed;bottom:0;width:100%;left:0;right:0;" current="{{tabCurrentIndex}}" list="{{tabBar.list}}" bindchange="tabSwitch" ></mp-tabbar>

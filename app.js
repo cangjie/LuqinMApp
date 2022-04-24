@@ -13,7 +13,25 @@ App({
   globalData: {
     requestPrefix: 'https://mini.luqinwenda.com/api/',
     userInfo: null,
-    sessionKey: ''
+    sessionKey: '',
+    userTabBar:{
+      "custom": true,
+      "color": "#000000",
+      "selectedColor": "#FF0000",
+      "backgroundColor": "#000000",
+      "list": [{
+        "pagePath": "/pages/customer/index/index",
+        "text": "文章"
+      }, 
+      {
+        "pagePath": "/pages/customer/question/question_submit",
+        "text": "问题"
+      }, 
+      {
+        "pagePath": "/pages/customer/mine/mine_index",
+        "text": "我的"
+      }]
+    }
   },
   loginPromise: new Promise(function(resolve){
     wx.login({
@@ -36,8 +54,5 @@ App({
         })
       }
     })
-   
-      
-    
   })
 })
