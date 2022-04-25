@@ -1,0 +1,4 @@
+<mp-navigation-bar title="{{title}}" loading="" back="back" ></mp-navigation-bar>
+<web-view src="{{url}}" ></web-view>
+<mp-tabbar style="position:fixed;bottom:0;width:100%;left:0;right:0;" 
+current="{{tabCurrentIndex}}" list="{{tabBar.list}}" bindchange="tabSwitch" ></mp-tabbar>

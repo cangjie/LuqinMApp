@@ -1,3 +1,16 @@
 <!--pages/customer/question/question_submit.wxml-->
 <mp-navigation-bar title="向卢老师提问" loading="" back="" ></mp-navigation-bar>
+
+<scroll-view scroll-y="true" style="position:relative; height:calc(75vh);">
+  <view style="height: 500rpx; background-color: red;">a</view>
+  <view style="height: 500rpx; background-color:green;">b</view>
+  <view style="height: 500rpx; background-color:blue;">c</view>
+  <view style="height: 500rpx; background-color:yellow;">d</view>
+  <view style="height: 500rpx; background-color:pink;">e</view>
+  <view style="height: 500rpx; background-color:peru;">f</view>
+  <view style="height: 500rpx; background-color:orange;">g</view>
+</scroll-view>
+<view style="margin-top: 20rpx;">
+  <button>我要提问</button>
+</view>
 <mp-tabbar style="position:fixed;bottom:0;width:100%;left:0;right:0;" current="{{tabCurrentIndex}}" list="{{tabBar.list}}" bindchange="tabSwitch" ></mp-tabbar>

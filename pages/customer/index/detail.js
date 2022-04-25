@@ -1,4 +1,4 @@
-// pages/customer/index/index.js
+// pages/customer/index/detail.js
 const app = getApp()
 Page({
 
@@ -6,42 +6,29 @@ Page({
    * Page initial data
    */
   data: {
-    sessionKey: '',
-    tabCurrentIndex: 0,
-    tabBar:{},
-    articleList:[]
+    id:'',
+    url:'',
+    title:''
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    this.setData({id: options.id})
     var that = this
     app.loginPromise.then(function(resolve){
-      console.log(resolve)
       that.setData({tabBar: app.globalData.userTabBar})
       var contentUrl = 'https://mini.luqinwenda.com/api/MiniAppHelper/GetHomePageArcitle'
       wx.request({
         url: contentUrl,
-        method: 'GET',
         success:(res)=>{
-          console.log('home page:', res)
-          
-          var articleList = []
-          var itemList = res.data.item
-          for(var i = 0; i < 5; i++){
-            articleList[i] = {
-              id: i.toString(),
-              title: itemList[i].content.news_item[0].title,
-              thumb: itemList[i].content.news_item[0].thumb_url,
-              media_id: itemList[i].content.media_id
-            }
-          }
-          that.setData({articleList: articleList})
+          var news = res.data.item[that.data.id].content.news_item[0]
+          console.log('Current article:', news)
+          that.setData({title: news.title, url: 'https://mini.luqinwenda.com/api/MiniAppHelper/GetMpContent?url=' + encodeURIComponent(news.url)})
         }
       })
     })
-    
   },
 
   /**
@@ -91,20 +78,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  
-  tabSwitch: function(e){
-    console.log('TabSwitch:', e)
-    var url = e.detail.item.pagePath
-    wx.redirectTo({
-      url: url
-    })
-  },
-  gotoDetail: function(e){
-    console.log('Go to detail:', e)
-    wx.navigateTo({
-      url: 'detail?id='+e.currentTarget.id,
-    })
   }
-
 })

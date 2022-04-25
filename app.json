@@ -4,7 +4,8 @@
     "pages/logs/logs",
     "pages/customer/index/index",
     "pages/customer/mine/mine_index",
-    "pages/customer/question/question_submit"
+    "pages/customer/question/question_submit",
+    "pages/customer/index/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",
