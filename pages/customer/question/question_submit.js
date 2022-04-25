@@ -17,6 +17,18 @@ Page({
     app.loginPromise.then(function(resolve){
       console.log(resolve)
       that.setData({tabBar: app.globalData.userTabBar})
+      var url = app.globalData.requestPrefix + 'syncsns/getsyncsns'
+      wx.request({
+        url: url,
+        success: (res)=>{
+          console.log('Questions:', res)
+          var questionList = []
+          for(var i = 0; i < 10; i++){
+            questionList[i] = res.data[i].syncsns_content
+          }
+          that.setData({questionList: questionList})
+        }
+      })
     })
   },
 
