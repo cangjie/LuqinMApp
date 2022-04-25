@@ -8,7 +8,8 @@ Page({
   data: {
     sessionKey: '',
     tabCurrentIndex: 0,
-    tabBar:{}
+    tabBar:{},
+    articleList:[]
   },
 
   /**
@@ -25,6 +26,17 @@ Page({
         method: 'GET',
         success:(res)=>{
           console.log('home page:', res)
+          
+          var articleList = []
+          var itemList = res.data.item
+          for(var i = 0; i < 5; i++){
+            articleList[i] = {
+              title: itemList[i].content.news_item[0].title,
+              thumb: itemList[i].content.news_item[0].thumb_url,
+              media_id: itemList[i].content.news_item[0].thumb_media_id
+            }
+          }
+          that.setData({articleList: articleList})
         }
       })
     })

@@ -1,7 +1,14 @@
 <!--pages/customer/index/index.wxml-->
 <mp-navigation-bar title="卢老师的文章" loading="" back="" ></mp-navigation-bar>
-<mp-cells title="test">
-  <mp-cell>bbb</mp-cell>
-  <mp-cell>ccc</mp-cell>
-</mp-cells>
+<!--view style="display: flex;flex-direction: row; margin-left: 0rpx;">
+  <view style="width: 1rpx;height: 100rpx; background-color: red;"></view>
+  <view style="width: 748rpx;height: 100rpx; background-color: green;"> </view>
+  <view style="width: 1rpx;height: 100rpx; background-color: blue;"> </view>
+</view-->
+<view wx:for="{{articleList}}" style="margin-left: 0rpx; margin-top: 0rpx;">
+  <view style="text-align: center; margin-left: 20rpx; margin-right: 20rpx; margin-top: 5rpx;height: 350rpx;">
+    <image src="{{item.thumb}}" mode="widthFix" style="width: 710rpx;" ></image>
+    <view style="position: relative;top: -110rpx; text-align: left; color: white;margin-left: 30rpx;margin-right: 10rpx;font-weight: bold;">{{item.title}}</view>
+  </view>
+</view>
 <mp-tabbar style="position:fixed;bottom:0;width:100%;left:0;right:0;" current="{{tabCurrentIndex}}" list="{{tabBar.list}}" bindchange="tabSwitch" ></mp-tabbar>
