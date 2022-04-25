@@ -19,6 +19,14 @@ Page({
     app.loginPromise.then(function(resolve){
       console.log(resolve)
       that.setData({tabBar: app.globalData.userTabBar})
+      var contentUrl = 'https://mini.luqinwenda.com/api/MiniAppHelper/GetHomePageArcitle'
+      wx.request({
+        url: contentUrl,
+        method: 'GET',
+        success:(res)=>{
+          console.log('home page:', res)
+        }
+      })
     })
     
   },
