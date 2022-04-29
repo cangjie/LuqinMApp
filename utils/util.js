@@ -14,6 +14,16 @@ const formatNumber = n => {
   return n[1] ? n : `0${n}`
 }
 
+const getQueryString = (query, name) => {
+  let reg = new RegExp("(\\?|&)" + name + "=([^&]*)(&|$)", "i");
+  let r = query.match(reg);
+  if (r != null) {
+      return decodeURIComponent(r[2]);
+  };
+  return null;
+}
+
 module.exports = {
-  formatTime
+  formatTime,
+  getQueryString
 }

@@ -8,7 +8,9 @@ Page({
    */
   data: {
     q: '',
-    scan: ''
+    scan: '',
+    id: '0',
+    scene: '0'
   },
 
   /**
@@ -19,10 +21,20 @@ Page({
     console.log(util.formatTime(new Date()))
     if (options.q!=null){
       var q = decodeURIComponent(options.q)
+      var id = util.getQueryString(q, 'id')
+      console.log('id', id)
+      that.setData({id: id, scene: 1})
     }
     //that.setData({q: options.q, scan: options.scancode_time})
     app.loginPromise.then(function(resolve){
-      
+      var logUrl = app.globalData.requestPrefix + 'QrCodeScanLogs/LogScan/' + id + '?sessionKey=' + encodeURIComponent(app.globalData.sessionKey)
+      wx.request({
+        url: logUrl,
+        method: 'GET',
+        success: (res)=>{
+
+        }
+      })
     })
   },
 
