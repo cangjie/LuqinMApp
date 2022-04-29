@@ -1,12 +1,14 @@
-// pages/customer/question/question_submit.js
+// pages/customer/poster/landing.js
 const app = getApp()
+import util from '../../../utils/util.js'
 Page({
 
   /**
    * Page initial data
    */
   data: {
-    tabCurrentIndex: 0
+    q: '',
+    scan: ''
   },
 
   /**
@@ -14,21 +16,13 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    console.log(util.formatTime(new Date()))
+    if (options.q!=null){
+      var q = decodeURIComponent(options.q)
+    }
+    //that.setData({q: options.q, scan: options.scancode_time})
     app.loginPromise.then(function(resolve){
-      console.log(resolve)
-      that.setData({tabBar: app.globalData.userTabBar})
-      var url = app.globalData.requestPrefix + 'syncsns/getsyncsns'
-      wx.request({
-        url: url,
-        success: (res)=>{
-          console.log('Questions:', res)
-          var questionList = []
-          for(var i = 0; i < 10; i++){
-            questionList[i] = res.data[i].syncsns_content
-          }
-          that.setData({questionList: questionList})
-        }
-      })
+      
     })
   },
 
@@ -79,17 +73,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  tabSwitch: function(e){
-    console.log('TabSwitch:', e)
-    var url = e.detail.item.pagePath
-    wx.redirectTo({
-      url: url
-    })
-  },
-  gotoMine:function(){
-    wx.redirectTo({
-      url: '../mine/mine_index',
-    })
   }
 })

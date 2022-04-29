@@ -19,7 +19,7 @@ Page({
   },
   onLoad() {
     wx.navigateTo({
-      url: '../customer/index/index'
+      url: '../customer/question/question_submit'
     })
     if (wx.getUserProfile) {
       this.setData({

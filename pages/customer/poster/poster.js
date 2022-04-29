@@ -1,4 +1,4 @@
-// pages/customer/question/question_submit.js
+// pages/customer/poster/poster.js
 const app = getApp()
 Page({
 
@@ -6,29 +6,15 @@ Page({
    * Page initial data
    */
   data: {
-    tabCurrentIndex: 0
+    imagePath: 'https://mini.luqinwenda.com/pages/Poster/Index'
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    var that = this
     app.loginPromise.then(function(resolve){
-      console.log(resolve)
-      that.setData({tabBar: app.globalData.userTabBar})
-      var url = app.globalData.requestPrefix + 'syncsns/getsyncsns'
-      wx.request({
-        url: url,
-        success: (res)=>{
-          console.log('Questions:', res)
-          var questionList = []
-          for(var i = 0; i < 10; i++){
-            questionList[i] = res.data[i].syncsns_content
-          }
-          that.setData({questionList: questionList})
-        }
-      })
+
     })
   },
 
@@ -79,17 +65,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  tabSwitch: function(e){
-    console.log('TabSwitch:', e)
-    var url = e.detail.item.pagePath
-    wx.redirectTo({
-      url: url
-    })
-  },
-  gotoMine:function(){
-    wx.redirectTo({
-      url: '../mine/mine_index',
-    })
   }
 })

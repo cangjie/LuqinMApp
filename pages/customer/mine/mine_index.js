@@ -6,8 +6,10 @@ Page({
    * Page initial data
    */
   data: {
-    tabCurrentIndex: 2,
-    tabBar:{}
+    tabCurrentIndex: 1,
+    tabBar:{},
+    questionText: '',
+    questionList:[]
   },
 
   /**
@@ -18,6 +20,7 @@ Page({
     app.loginPromise.then(function(resolve){
       console.log(resolve)
       that.setData({tabBar: app.globalData.userTabBar})
+      that.getQuestions()
     })
   },
 
@@ -74,6 +77,54 @@ Page({
     var url = e.detail.item.pagePath
     wx.redirectTo({
       url: url
+    })
+  },
+  questionInput:function(e){
+    console.log(e)
+    var that = this
+    that.setData({questionText: e.detail.value})
+  },
+  submitQuestion:function(){
+    var that = this
+    var url = app.globalData.requestPrefix + 'Question/PostQuestion?sessionKey=' 
+      + encodeURIComponent(app.globalData.sessionKey)
+    if (that.data.questionText.trim()==''){
+      return;
+    }
+    var question = {
+      id: 0,
+      user_id: 0,
+      topic: that.data.questionText,
+      status: '未读'
+    }
+    wx.request({
+      url: url,
+      method:'post',
+      data: question,
+      success:(res)=>{
+        console.log(res)
+        wx.showToast({
+          title: '您的问题已送达',
+        })
+        that.getQuestions()
+      }
+    })
+  },
+  getQuestions: function(){
+    var that = this
+    var url = app.globalData.requestPrefix + 'Question/GetQuestion?sessionKey=' + encodeURIComponent(app.globalData.sessionKey)
+    wx.request({
+      url: url,
+      method: 'GET',
+      success:(res)=>{
+        
+        for(var i = 0; i < res.data.length; i++){
+          var qTime = new Date(res.data[i].create_date)
+          res.data[i].create_date = qTime.getFullYear().toString() + '-' + (qTime.getMonth() + 1).toString() + '-' + qTime.getDay().toString()
+        }
+        console.log(res)
+        that.setData({questionList: res.data})
+      }
     })
   }
 })

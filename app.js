@@ -19,10 +19,13 @@ App({
       "color": "#000000",
       "selectedColor": "#FF0000",
       "backgroundColor": "#000000",
-      "list": [{
+      "list": [
+      /*
+      {
         "pagePath": "/pages/customer/index/index",
         "text": "文章"
       }, 
+      */
       {
         "pagePath": "/pages/customer/question/question_submit",
         "text": "问题"

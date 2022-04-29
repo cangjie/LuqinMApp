@@ -1,3 +1,15 @@
 <!--pages/customer/mine/mine_index.wxml-->
-<mp-navigation-bar title="我的" loading="" back="" ></mp-navigation-bar>
+<mp-navigation-bar title="我的问题" loading="" back="" ></mp-navigation-bar>
+<view style="margin-left: 50rpx;margin-right: 50rpx;margin-right: 50rpx;" >
+  <textarea  style="width: calc(85vw);height: 300rpx;text-align: left;border-color:#c0c0c0;border-width: 1rpx;border-style: solid;" bindinput="questionInput" ></textarea>
+</view>
+<view style="margin-top: 20rpx;margin-bottom: 20rpx;"><button bindtap="submitQuestion" > 向 卢 老 师 提 问 </button></view>
+<scroll-view scroll-y="true" style="position:relative; height:calc(75vh);">
+  <view wx:for="{{questionList}}" style="margin-left: 15rpx;margin-right:15rpx;margin-top: 30rpx;"> 
+    <view>{{item.topic}}</view>
+    <view style="font-size: 8pt;color: #c0c0c0;">{{item.create_date}} {{item.status}}</view>
+    <view style="height: 1rpx; background-color:#c0c0c0; margin-top: 20rpx;"></view>
+  </view>
+  
+</scroll-view>
 <mp-tabbar style="position:fixed;bottom:0;width:100%;left:0;right:0;" current="{{tabCurrentIndex}}" list="{{tabBar.list}}" bindchange="tabSwitch" ></mp-tabbar>

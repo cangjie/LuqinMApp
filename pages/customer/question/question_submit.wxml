@@ -1,11 +1,14 @@
 <!--pages/customer/question/question_submit.wxml-->
 <mp-navigation-bar title="向卢老师提问" loading="" back="" ></mp-navigation-bar>
 
-<scroll-view scroll-y="true" style="position:relative; height:calc(75vh);">
-  <view wx:for="{{questionList}}" style="margin-left: 15rpx;margin-right:15rpx;margin-top: 30rpx;">    {{item}}</view>
+<scroll-view scroll-y="true" style="position:relative; height:calc(70vh);">
+  <view wx:for="{{questionList}}" style="margin-left: 15rpx;margin-right:15rpx;margin-top: 30rpx;"> 
+    <view>{{item}}</view>
+    <view style="height: 1rpx; background-color:#c0c0c0; margin-top: 20rpx;"></view>
+  </view>
   
 </scroll-view>
 <view style="margin-top: 20rpx;">
-  <button>我要提问</button>
+  <button bindtap="gotoMine">我要提问</button>
 </view>
 <mp-tabbar style="position:fixed;bottom:0;width:100%;left:0;right:0;" current="{{tabCurrentIndex}}" list="{{tabBar.list}}" bindchange="tabSwitch" ></mp-tabbar>

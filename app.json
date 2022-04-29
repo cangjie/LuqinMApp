@@ -5,7 +5,9 @@
     "pages/customer/index/index",
     "pages/customer/mine/mine_index",
     "pages/customer/question/question_submit",
-    "pages/customer/index/detail"
+    "pages/customer/index/detail",
+    "pages/customer/poster/poster",
+    "pages/customer/poster/landing"
   ],
   "window": {
     "backgroundTextStyle": "light",

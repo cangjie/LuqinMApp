@@ -1,0 +1,24 @@
+{
+  "setting": {},
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "poster",
+          "pathName": "pages/customer/poster/poster",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "landing",
+          "pathName": "pages/customer/poster/landing",
+          "query": "",
+          "launchMode": "default",
+          "scene": 1013
+        }
+      ]
+    }
+  },
+  "description": "Project configuration file, more information: https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html"
+}

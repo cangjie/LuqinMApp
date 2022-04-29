@@ -1,0 +1,2 @@
+<!--pages/customer/poster/poster.wxml-->
+<web-view src="{{imagePath}}" style="width: 750rpx;height:fit-content" ></web-view>
