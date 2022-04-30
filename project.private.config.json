@@ -13,9 +13,9 @@
         {
           "name": "landing",
           "pathName": "pages/customer/poster/landing",
-          "query": "",
+          "query": "id=4",
           "launchMode": "default",
-          "scene": 1013
+          "scene": 1012
         }
       ]
     }

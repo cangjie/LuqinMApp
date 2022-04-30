@@ -7,8 +7,8 @@ Page({
    * Page initial data
    */
   data: {
-    q: '',
-    scan: ''
+    id: 0,
+    isScan: false
   },
 
   /**
@@ -16,13 +16,27 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    console.log(util.formatTime(new Date()))
+    //console.log(util.formatTime(new Date()))
     if (options.q!=null){
       var q = decodeURIComponent(options.q)
+      var id = util.getQueryValue(q, 'id')
+      that.setData({id: id, isScan: true})
+    }
+    else {
+      var id = options.id
+      that.setData({id: id, isScan: false})
     }
     //that.setData({q: options.q, scan: options.scancode_time})
     app.loginPromise.then(function(resolve){
-      
+      var id = that.data.id
+      var url = app.globalData.requestPrefix + 'QrCodeScanLogs/LogScan/' + id + '?sessionKey=' + encodeURIComponent(app.globalData.sessionKey)
+      wx.request({
+        url: url,
+        method: 'GET',
+        success: (res)=>{
+          console.log('Log poster qrcode scan', res)
+        }
+      })
     })
   },
 

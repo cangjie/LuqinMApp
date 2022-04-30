@@ -1,5 +1,6 @@
 <mp-navigation-bar title="关注公众号" loading="" back="" ></mp-navigation-bar>
-<view style="margin-top: 1rpx;">
+<view wx:if="{{isScan}}" style="margin-top: 1rpx;">
   <official-account></official-account>
   <image style="width: 750rpx;"  mode="widthFix" src="https://mini.luqinwenda.com/images/follow_official_account.jpg" ></image>
 </view>
+<web-view wx:else style="width: 750rpx; margin-left:0rpx;margin-right: 0rpx;" src="https://mini.luqinwenda.com/follow_official_account.html" ></web-view>
