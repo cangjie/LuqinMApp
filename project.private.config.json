@@ -16,6 +16,13 @@
           "query": "id=4",
           "launchMode": "default",
           "scene": 1012
+        },
+        {
+          "name": "media",
+          "pathName": "pages/customer/media/play",
+          "query": "id=4",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

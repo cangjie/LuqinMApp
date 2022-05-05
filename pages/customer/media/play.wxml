@@ -1,0 +1,18 @@
+<!--pages/customer/media/play.wxml-->
+<mp-navigation-bar title="微课教室-{{media.name}}" loading="" back="" ></mp-navigation-bar>
+<view wx:if="{{id!=0}}" style="text-align: center;" >
+  <view wx:if="{{media.type=='audio'}}"  >
+    <view style="margin-top: 50rpx;"></view>
+    <view wx:for="{{media.mediaSubTitles}}"  id="subtitle_{{item.id}}" style="margin-left: 100rpx;margin-right: 100rpx;margin-bottom: 25rpx; border-style:solid;border-width: 1rpx;border-color: #c0c0c0;" bindtap="playSeg" >
+      <view style="display:flex;flex-direction: row;margin-top: 50rpx;margin-bottom: 50rpx;" >
+        <view style="width: 100%;">{{item.title}}</view>
+        <view style="width: 100rpx;"><icon type="success_no_circle" ></icon></view>
+      </view>
+      <progress percent="{{percent}}"  stroke-width="3" percent="{{item.progress}}" ></progress>
+    </view>
+    <button bindtap="tapContinue" > 播 放 </button>
+    <button bindtap="tapStop" > 暂 停 </button>
+    
+    <!--image style="width: 750rpx;" mode="widthFix" src="{{thumb}}" ></image-->
+  </view> 
+</view>
