@@ -1,46 +1,32 @@
-// pages/customer/poster/landing.js
+// pages/customer/media/control_play.js
 const app = getApp()
-import util from '../../../utils/util.js'
 Page({
 
   /**
    * Page initial data
    */
   data: {
-    id: 0,
-    isScan: false
+
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    this.audio = wx.createAudioContext('player', this)
     var that = this
-    //console.log(util.formatTime(new Date()))
-    if (options.q!=null){
-      var q = decodeURIComponent(options.q)
-
-      var id = util.getQueryValue(q, 'id')
-      that.setData({id: id, isScan: true})
-    }
-    else {
-      var id = options.id
-      that.setData({id: id, isScan: false})
-    }
-    //that.setData({q: options.q, scan: options.scancode_time})
     app.loginPromise.then(function(resolve){
-      var id = that.data.id
-      var url = app.globalData.requestPrefix + 'QrCodeScanLogs/LogScan/' + id + '?sessionKey=' + encodeURIComponent(app.globalData.sessionKey)
-      wx.request({
-        url: url,
-        method: 'GET',
-        success: (res)=>{
-          console.log('Log poster qrcode scan', res)
-        }
-      })
+      var playUrl = app.globalData.requestPrefix + 'Media/PlayMedia/4?sessionKey=' + encodeURIComponent(app.globalData.sessionKey)
+      that.audio.setSrc(playUrl)
+      //that.audio.seek(1000)
+      
     })
   },
-
+  seek: function() {
+    var that = this
+    that.audio.seek(100)
+    that.audio.play()
+  },
   /**
    * Lifecycle function--Called when page is initially rendered
    */

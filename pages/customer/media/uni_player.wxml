@@ -1,0 +1,12 @@
+<mp-navigation-bar title="微课教室" loading="" back="" ></mp-navigation-bar>
+<view>
+  <view>
+    description
+  </view>
+  <view style="display: flex;flex-direction: row;">
+    <button disabled="{{!enable}}" bindtap="bufferSeek">-15</button><button disabled="{{!enable}}" >Play</button><button disabled="{{!enable}}" bindtap="forward" >+15</button>
+  </view>
+  <view>
+    Segment list
+  </view>
+</view>

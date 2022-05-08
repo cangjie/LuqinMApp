@@ -1,0 +1,3 @@
+<mp-navigation-bar title="微课教室" loading="" back="" ></mp-navigation-bar>
+<button bindtap="stop" >stop</button>
+<button bindtap="seek" >seek</button>
