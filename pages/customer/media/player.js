@@ -6,15 +6,19 @@ Page({
    * Page initial data
    */
   data: {
-    allowSeek: true,
+    allowSeek: false,
     mediaUrl: '',
     id: 0,
     currentStatus: 'loading',
     media:{},
-    message:'载入中。。。',
+    message:'查找断点',
     percent: 0,
     allowPlay: false,
-    isPlaying: false
+    isPlaying: false,
+    currentTitle:'',
+    currentPosition: 0,
+    currentSubTitleId: 0,
+    willPlay: false
   },
 
   /**
@@ -29,23 +33,30 @@ Page({
         url: getMediaInfoUrl,
         method: 'GET',
         success:(res)=>{
-          that.setData({media: res.data})
+          //that.setData({media: res.data})
+          var media = res.data
           var mediaDataUrl = app.globalData.requestPrefix + 'Media/PlayMedia/' + res.data.id + '?sessionKey=' + encodeURIComponent(app.globalData.sessionKey)
+          that.audio.src = mediaDataUrl
           var downloadTask = wx.downloadFile({
             url: mediaDataUrl,
             method: 'GET',
-            timeout: 15000,
+            timeout: 30000,
             success:(res)=>{
               console.log('download success.', res)
-              that.setData({percent: 100, message: '载入成功', allowSeek: true, allowPlay: true})
+              that.setData({percent: 100, message: '载入成功', allowSeek: true, allowPlay: true, 
+              currentStatus: '', percent: that.data.media.mediaSubTitles[that.data.currentSubTitleId].progress})
               that.audio.src = res.tempFilePath
             },
             fail:(res)=>{
               console.log('download fail.', res)
               that.audio.src = mediaDataUrl
-              that.setData({allowSeek: false, message: '载入失败，从头开始', allowPlay: true})
+              that.setData({allowSeek: false, message: '无法找到断点', allowPlay: true, currentStatus: '', percent: 0})
+            },
+            complete:(res)=>{
+              //that.setData({currentStatus: '', percent: that.data.media.mediaSubTitles[that.data.currentSubTitleId].progress})
             }
           })
+          that.downloadTask = downloadTask
           setInterval(() => {
             downloadTask.onProgressUpdate((res)=>{
               console.log('download progress', res)
@@ -54,6 +65,37 @@ Page({
               downloadTask.offProgressUpdate()
             })
           }, 3000);
+
+          var getProcessUrl = app.globalData.requestPrefix + 'UserStudyProgress/GetProgress/' + media.id + '?sessionKey=' + encodeURIComponent(app.globalData.sessionKey)
+          wx.request({
+            url: getProcessUrl,
+            method: 'GET',
+            success:(res)=>{
+              var currentTitle = ''//media.mediaSubTitles.length > 0? media.mediaSubTitles[0].title : media.name
+              var currentPosition = 0
+              var currentPercent = 0
+              var currentSubTitleId = 0
+              for(var i = 0; i < media.mediaSubTitles.length; i++){
+                media.mediaSubTitles[i].progress = 0
+                for(var j = 0; j < res.data.length; j++){
+                  if (media.mediaSubTitles[i].id == res.data[j].mediaSubTitle.id){
+                    media.mediaSubTitles[i].progress = res.data[j].progress
+                    break
+                  }
+                }
+                if (media.mediaSubTitles[i].progress < 100 && currentTitle == ''){
+                  currentTitle = media.mediaSubTitles[i].title
+                  currentPercent = media.mediaSubTitles[i].progress
+                  currentPosition = media.mediaSubTitles[i].start_position 
+                    + parseInt((media.mediaSubTitles[i].end_position - media.mediaSubTitles[i].start_position) * media.mediaSubTitles[i].progress / 100)
+                  currentSubTitleId = i
+                }
+              }
+              that.setData({media: media, currentTitle: currentTitle, currentPosition: currentPosition, currentSubTitleId: currentSubTitleId})
+            }
+          })
+
+
         }
       })
     })
@@ -67,9 +109,17 @@ Page({
     that.audio = wx.createInnerAudioContext()
     that.audio.onCanplay(()=>{
       console.log('can play')
+      if (that.data.willPlay){
+        //that.setData({willPlay: false})
+        if (that.data.isPlaying){
+          that.audio.pause()
+        }
+        that.audio.play()
+      }
     })
     that.audio.onTimeUpdate(()=>{
       console.log('playing', that.audio.currentTime)
+
       if (!that.data.isPlaying){
         that.setData({isPlaying: true})
       }
@@ -77,13 +127,28 @@ Page({
     that.audio.onPause(()=>{
       that.setData({isPlaying: false})
     })
+    that.audio.onSeeked(()=>{
+      console.log('seeked')
+      that.setData({isPlaying: true})
+      that.audio.play()
+      //that.data.willPlay = false
+      //that.setData({willPlay: true})
+    })
   },
 
   play: function(){
     var that = this
-    if (that.data.allowPlay){
+    that.downloadTask.abort()
+    if (that.data.allowSeek){
+      that.data.willPlay = true
+      that.audio.seek(that.data.currentPosition)
+
+    }
+    else{
       that.audio.play()
     }
+      //that.setData({willPlay: true})
+    
     
   },
   pause: function(){

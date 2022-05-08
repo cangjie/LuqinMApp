@@ -5,10 +5,11 @@
   </view>
   <view style="margin-top: 10rpx;margin-left: 10rpx; margin-right: 10rpx;">
     <view style="display: flex;flex-direction: row; height: 100rpx;">
-      <view style="margin-left: 100rpx;width: 60%; margin-top: 20rpx;font-weight: bold;">第一节：甲乙丙丁</view>
+      <view style="margin-left: 100rpx;width: 60%; margin-top: 20rpx;font-weight: bold;">{{currentTitle}}</view>
       <view class="memo-font" style="text-align: right;margin-top: 50rpx;">{{message}}</view>
     </view>
-    <progress percent="{{percent}}" color="gray"></progress>
+    <progress wx:if="{{currentStatus=='loading'}}" percent="{{percent}}" color="gray"></progress>
+    <progress wx:else percent="{{percent}}" color="green"></progress>
     <view style="display: flex;flex-direction: row; margin-top: 20rpx;" >
       <view style="text-align: center; width: 150rpx;"><image src="/images/prev.png" style="width: 70rpx; height: 70rpx;" ></image></view>
       <view style="text-align: center; width: 150rpx;"><image src="/images/back_15.png" style="width: 70rpx; height: 70rpx;" ></image></view>
@@ -31,8 +32,8 @@
         </view>
         <view style="display: flex;">
           <view class="memo-font" style="width: 30%; margin-left: 100rpx;" >10:32</view>
-          <view class="memo-font" style="width: 40%;" >5466次学习</view>
-          <view class="memo-font" style="width: 30%;" >已学习 0%</view>
+          <view class="memo-font" style="width: 40%;" >已学习 {{item.progress}}%</view>
+          <view class="memo-font" style="width: 30%;" ></view>
         </view>
       </view>
       
