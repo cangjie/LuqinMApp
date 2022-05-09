@@ -13,7 +13,9 @@
     "pages/customer/media/ios_play",
     "pages/customer/media/control_play",
     "pages/customer/media/uni_player",
-    "pages/customer/media/player"
+    "pages/customer/media/player",
+    "pages/customer/media/download_play",
+    "pages/customer/media/quick_player"
   ],
   "window": {
     "backgroundTextStyle": "light",

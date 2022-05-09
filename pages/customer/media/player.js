@@ -34,6 +34,7 @@ Page({
         method: 'GET',
         success:(res)=>{
           //that.setData({media: res.data})
+          var timer
           var media = res.data
           var mediaDataUrl = app.globalData.requestPrefix + 'Media/PlayMedia/' + res.data.id + '?sessionKey=' + encodeURIComponent(app.globalData.sessionKey)
           that.audio.src = mediaDataUrl
@@ -53,11 +54,12 @@ Page({
               that.setData({allowSeek: false, message: '无法找到断点', allowPlay: true, currentStatus: '', percent: 0})
             },
             complete:(res)=>{
+              clearInterval(timer)
               //that.setData({currentStatus: '', percent: that.data.media.mediaSubTitles[that.data.currentSubTitleId].progress})
             }
           })
           that.downloadTask = downloadTask
-          setInterval(() => {
+          timer = setInterval(() => {
             downloadTask.onProgressUpdate((res)=>{
               console.log('download progress', res)
               var percent = parseInt(100 * res.totalBytesWritten/1024/1024/that.data.media.file_size)
@@ -126,6 +128,14 @@ Page({
     })
     that.audio.onPause(()=>{
       that.setData({isPlaying: false})
+    })
+    that.audio.onSeeking(()=>{
+      console.log('seeking')
+      setTimeout(()=>{
+        if (!that.data.isPlaying){
+          that.audio.play()
+        }
+      }, 1000)
     })
     that.audio.onSeeked(()=>{
       console.log('seeked')

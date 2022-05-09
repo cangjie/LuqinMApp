@@ -48,7 +48,7 @@ Page({
     })
     this.audio.onSeeked(()=>{
       console.log('seeked')
-      //that.audio.play()
+      that.audio.play()
     })
     
   },
@@ -65,9 +65,11 @@ Page({
    // this.audio.startTime = 1000
     //this.audio.play()
     this.audio.seek(1000)
+    /*
     setTimeout(()=>{
       that.audio.play()
     }, 1000)
+    */
   },
 
   /**

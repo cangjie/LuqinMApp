@@ -53,6 +53,7 @@ Page({
             }
           })
           that.audio.src = playUrl
+          /*
           that.audio.onCanplay(()=>{
             if (that.data.play == 1){
               that.audio.pause()
@@ -62,6 +63,7 @@ Page({
               that.setData({status: that.data.status + ' ready'})
             }
           })
+          */
           /*
           that.audio.seek(1000)
           
@@ -88,13 +90,11 @@ Page({
     this.audio = wx.createInnerAudioContext()
     
     this.audio.onSeeking(()=>{
+      console.log('seeking')
       that.setData({status: that.data.status + ' seeking', play: 1})
-      
       that.audio.pause()
       that.audio.onSeeked(()=>{
         that.setData({status: that.data.status + ' seeked', play: 1})
-        //that.audio.play()
-       
         that.audio.play()
       })
       
@@ -130,7 +130,7 @@ Page({
           }
         })
       }
-      //that.setData({percent: parseInt(100*that.audio.currentTime/that.data.totalLength)})
+      
     })
   },
   /**

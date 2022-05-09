@@ -1,0 +1,5 @@
+/* pages/customer/media/player.wxss */
+.memo-font{
+  font-size: 9pt;
+  color: gray
+}

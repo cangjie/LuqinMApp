@@ -1,0 +1,42 @@
+<mp-navigation-bar title="微课教室" loading="" back="" ></mp-navigation-bar>
+<view>
+  <view>
+    description
+  </view>
+  <view style="margin-top: 10rpx;margin-left: 10rpx; margin-right: 10rpx;">
+    <view style="display: flex;flex-direction: row; height: 100rpx;">
+      <view style="margin-left: 100rpx;width: 60%; margin-top: 20rpx;font-weight: bold;">{{media.mediaSubTitles[currentSeg].title}}</view>
+      <view class="memo-font" style="text-align: right;margin-top: 50rpx;">{{message}}</view>
+    </view>
+    <progress wx:if="{{currentStatus=='loading'}}" percent="{{percent}}" color="gray"></progress>
+    <progress wx:else percent="{{percent}}" color="green"></progress>
+    <view style="display: flex;flex-direction: row; margin-top: 20rpx;" >
+      <view style="text-align: center; width: 150rpx;"><image src="/images/prev.png" style="width: 70rpx; height: 70rpx;" ></image></view>
+      <view style="text-align: center; width: 150rpx;"><image src="/images/back_15.png" style="width: 70rpx; height: 70rpx;" ></image></view>
+      <view style="text-align: center; width: 150rpx;">
+        <image wx:if="{{!isPlaying}}" bindtap="play" src="/images/play.png" style="width: 70rpx; height: 70rpx;" ></image>
+        <image wx:else bindtap="pause" src="/images/pause.png" style="width: 70rpx; height: 70rpx;" ></image>
+      </view>
+      <view style="text-align: center; width: 150rpx;"><image src="/images/forward_15.png" style="width: 70rpx; height: 70rpx;" ></image></view>
+      <view style="text-align: center; width: 150rpx;"><image src="/images/next.png" style="width: 70rpx; height: 70rpx;" ></image></view>
+    <!--button disabled="{{!enable}}" bindtap="bufferSeek"   >-15</button><button disabled="{{!enable}}" >Play</button><button disabled="{{!enable}}" bindtap="forward" >+15</button-->
+    </view>
+  </view>
+  <view style="margin-left: 40rpx; margin-right: 40rpx;margin-top: 20rpx;">
+    <view style="margin-left: 60rpx;margin-bottom: 20rpx; font-weight: bold;">课程小节</view>
+    <view style="display:table; background-color: #f0f0f0;width: 100%;">
+      <view id="{{item.id}}" style="display: table-row;height: 150rpx;" wx:for="{{media.mediaSubTitles}}" bindtap="playSeg"  >
+        <view style="display: flex;" >
+          <view style="width: 80%; margin-left: 20rpx;margin-top: 40rpx;">{{item.title}}</view>
+          <view style="width: 20%;text-align: right;margin-right: 60rpx;margin-top: 40rpx;" >播放</view> 
+        </view>
+        <view style="display: flex;">
+          <view class="memo-font" style="width: 30%; margin-left: 100rpx;" >10:32</view>
+          <view class="memo-font" style="width: 40%;" >已学习 {{item.progress}}%</view>
+          <view class="memo-font" style="width: 30%;" ></view>
+        </view>
+      </view>
+      
+    </view>
+  </view>
+</view>
