@@ -1,4 +1,0 @@
-<mp-navigation-bar title="微课教室" loading="" back="" ></mp-navigation-bar>
-<audio id="player" controls="controls" ></audio>
-<button bindtap="stop" >stop</button>
-<button bindtap="seek" >seek</button>

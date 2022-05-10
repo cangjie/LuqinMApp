@@ -8,13 +8,6 @@
     "pages/customer/index/detail",
     "pages/customer/poster/poster",
     "pages/customer/poster/landing",
-    "pages/customer/media/play",
-    "pages/customer/media/test_play",
-    "pages/customer/media/ios_play",
-    "pages/customer/media/control_play",
-    "pages/customer/media/uni_player",
-    "pages/customer/media/player",
-    "pages/customer/media/download_play",
     "pages/customer/media/quick_player"
   ],
   "window": {
