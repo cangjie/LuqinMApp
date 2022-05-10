@@ -44,6 +44,9 @@ Page({
             timeout: 30000,
             success:(res)=>{
               console.log('download success.', res)
+
+
+              
               that.setData({percent: 100, message: '载入成功', allowSeek: true, allowPlay: true, 
               currentStatus: '', percent: that.data.media.mediaSubTitles[that.data.currentSubTitleId].progress})
               that.audio.src = res.tempFilePath
