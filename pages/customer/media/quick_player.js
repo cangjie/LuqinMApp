@@ -12,6 +12,7 @@ Page({
     message: '',
 
     canSeek: false,
+    message2: ''
 
   },
 
@@ -19,7 +20,13 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
+    this.setData({message2: this.data.message2 + ' onload'})
     var that = this
+
+    that.fs = wx.getFileSystemManager()
+    that.userDataRoot = wx.env.USER_DATA_PATH
+    that.audio = wx.createInnerAudioContext()
+
     var getMediaInfoPromise = new Promise(function(resolve){
       var getMediaInfoUrl = app.globalData.requestPrefix + 'Media/GetMedia/' + options.id
       wx.request({
@@ -31,7 +38,7 @@ Page({
       })
     })
     app.loginPromise.then((resolve)=>{
-
+      that.setData({message: '已登录'})
       var getMediaFilePromise = new Promise(function(resolve){
         var remoteMediaUrl = app.globalData.requestPrefix + 'Media/PlayMedia/' + options.id + '?sessionKey=' + encodeURIComponent(app.globalData.sessionKey)
         var localMediaUrl = that.userDataRoot + '/' + options.id + '.mp3'
@@ -60,6 +67,7 @@ Page({
           url: getProcessUrl,
           method: 'GET',
           success:(res)=>{
+            that.setData({message: '课程加载完成'})
             var currentSeg = -1
             var lastDate = new Date('2022-1-1')
             for(var i = 0; i < media.mediaSubTitles.length; i++){
@@ -121,10 +129,9 @@ Page({
    * Lifecycle function--Called when page is initially rendered
    */
   onReady() {
+    this.setData({message2:  this.data.message2 + ' onready'})
     var that = this
-    that.fs = wx.getFileSystemManager()
-    that.userDataRoot = wx.env.USER_DATA_PATH
-    that.audio = wx.createInnerAudioContext()
+    
     that.audio.onTimeUpdate(()=>{
       console.log('playing', that.audio.currentTime)
       if (!that.data.isPlaying){
@@ -146,6 +153,10 @@ Page({
       var progress = parseInt(100 * (currentTime - media.mediaSubTitles[currentSeg].start_position)
         / (media.mediaSubTitles[currentSeg].end_position - media.mediaSubTitles[currentSeg].start_position))
       
+      if (progress > 100){
+        progress = 100
+      }
+
       if (progress > that.data.percent){
         that.setData({percent: progress})
       }
@@ -170,10 +181,12 @@ Page({
     })
     that.audio.onSeeked(()=>{
       console.log('seeked')
+      that.setData({message: '跳转完成'})
       that.audio.play()
     })
     that.audio.onSeeking(()=>{
       console.log('seeking')
+      that.setData({message: '正在跳转'})
       setTimeout(() => {
         if (!that.data.isPlaying){
           that.audio.play()
@@ -184,11 +197,13 @@ Page({
   play: function(e){
     console.log('button pressed', e)
     var that = this
+    that.setData({message: '准备播放'})
     var media = that.data.media
     if (that.data.isPlaying){
       that.audio.pause()
     }
     if (that.data.localMediaUrl!='' && that.audio.src != that.data.localMediaUrl){
+      that.setData({message: '准备播放', canSeek: true})
       that.audio.src = that.data.localMediaUrl
     }
     if (that.data.canSeek){
@@ -220,9 +235,12 @@ Page({
         default:
           break
       }
+      that.setData({message: that.audio.src + '跳转到断点' + currentTime})
       that.audio.seek(currentTime)
     }
     else{
+      that.setData({message: '顺序播放'})
+      that.audio.src = that.data.remoteMediaUrl
       that.audio.play()
     }
   },
@@ -236,21 +254,23 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow() {
-
+    this.setData({message2:  this.data.message2 + ' onshow'})
   },
 
   /**
    * Lifecycle function--Called when page hide
    */
   onHide() {
-
+    this.audio.pause()
+    this.setData({isPlaying: false})
   },
 
   /**
    * Lifecycle function--Called when page unload
    */
   onUnload() {
-
+    this.audio.pause()
+    this.setData({isPlaying: false})
   },
 
   /**

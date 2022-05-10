@@ -41,3 +41,4 @@
     </view>
   </view>
 </view>
+<view>{{message2}}</view>
