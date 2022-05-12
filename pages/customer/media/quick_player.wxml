@@ -1,7 +1,11 @@
 <mp-navigation-bar title="微课教室" loading="" back="" ></mp-navigation-bar>
 <view>
   <view>
-    description
+    <image style="width: 100%;" mode="widthFix" src="{{media.head_img}}" ></image>
+    <view style="font-weight: bold;margin-left: 110rpx;" >课程介绍</view>
+    <view  style="margin-left: 30rpx; margin-right: 30rpx;" >
+      <text class="memo-font" decode="true" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{media.intro}}</text>
+    </view>
   </view>
   <view style="margin-top: 10rpx;margin-left: 10rpx; margin-right: 10rpx;">
     <view style="display: flex;flex-direction: row; height: 100rpx;">
@@ -41,4 +45,3 @@
     </view>
   </view>
 </view>
-<view>{{message2}}</view>

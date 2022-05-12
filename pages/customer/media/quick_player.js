@@ -9,6 +9,7 @@ Page({
     currentTitle: '',
     currentTime: 0,
     isPlaying: false,
+    isTimeMeterRun: false,
     message: '',
 
     canSeek: false,
@@ -73,7 +74,7 @@ Page({
             for(var i = 0; i < media.mediaSubTitles.length; i++){
               media.mediaSubTitles[i].progress = 0
               for(var j = 0; j < res.data.length; j++){
-                if (media.mediaSubTitles[i].id == res.data[j].mediaSubTitle.id){
+                if (media.mediaSubTitles[i].id == res.data[j].media_subtitle_id){
                   media.mediaSubTitles[i].progress = res.data[j].progress
                   var updateDate = new Date(res.data[j].update_date.toString())
                   if (lastDate < updateDate){
@@ -103,9 +104,11 @@ Page({
               nowDate.setDate(day)
               if (that.data.localMediaUrl == '' || nowDate > that.data.lastDate){
                 console.log('need refresh')
-                wx.downloadFile({
+                var downloadTimer
+                var downloadTask = wx.downloadFile({
                   url: that.data.remoteMediaUrl,
                   success:(res)=>{
+                    console.log('download success', res)
                     that.fs.saveFile({
                       tempFilePath: res.tempFilePath,
                       filePath: wx.env.USER_DATA_PATH  + '/' + options.id + '.mp3',
@@ -114,8 +117,12 @@ Page({
                         console.log('file refreshed')
                       }
                     })
+                  },
+                  fail:(res)=>{
+                    console.log('download failed', res)
                   }
                 })
+                
               }
             })
 
@@ -128,56 +135,65 @@ Page({
   /**
    * Lifecycle function--Called when page is initially rendered
    */
+
+  setProgress: function(currentTime){
+    console.log('playing', currentTime)
+    var that = this
+    var media = that.data.media
+    var currentSeg = 0
+    for(var i = 0; i < media.mediaSubTitles.length; i++){
+      if (media.mediaSubTitles[i].start_position <= currentTime 
+        && media.mediaSubTitles[i].end_position >= currentTime){
+          currentSeg = i
+          break
+      }
+    }
+    if (that.data.currentSeg != currentSeg){
+      that.setData({currentSeg: currentSeg})
+    }
+    var progress = parseInt(100 * (currentTime - media.mediaSubTitles[currentSeg].start_position)
+      / (media.mediaSubTitles[currentSeg].end_position - media.mediaSubTitles[currentSeg].start_position))
+    
+    if (progress > 100){
+      progress = 100
+    }
+    if (progress > that.data.percent){
+      that.setData({percent: progress})
+    }
+    if (progress > media.mediaSubTitles[currentSeg].progress){
+      var updateProgressUrl = app.globalData.requestPrefix + 'UserStudyProgress/SetProgress/' + media.mediaSubTitles[currentSeg].id + '?progress=' + progress + '&sessionKey=' + encodeURIComponent(app.globalData.sessionKey)
+      wx.request({
+        url: updateProgressUrl,
+        method: 'GET',
+        success:(res)=>{
+          console.log('Set Progress:', res)
+          media.mediaSubTitles[currentSeg].progress = progress
+          that.setData({currentSeg: currentSeg, percent: progress, media: media})
+        }
+      })
+    }
+  },
+
   onReady() {
     this.setData({message2:  this.data.message2 + ' onready'})
     var that = this
-    
     that.audio.onTimeUpdate(()=>{
-      console.log('playing', that.audio.currentTime)
+      
       if (!that.data.isPlaying){
         that.setData({isPlaying: true})
       }
-      var media = that.data.media
-      var currentSeg = 0
-      var currentTime = that.audio.currentTime
-      for(var i = 0; i < media.mediaSubTitles.length; i++){
-        if (media.mediaSubTitles[i].start_position <= currentTime 
-          && media.mediaSubTitles[i].end_position >= currentTime){
-            currentSeg = i
-            break
-        }
+      if (that.audio.src == that.data.localMediaUrl){
+        that.setProgress(that.audio.currentTime)
       }
-      if (that.data.currentSeg != currentSeg){
-        that.setData({currentSeg: currentSeg})
-      }
-      var progress = parseInt(100 * (currentTime - media.mediaSubTitles[currentSeg].start_position)
-        / (media.mediaSubTitles[currentSeg].end_position - media.mediaSubTitles[currentSeg].start_position))
-      
-      if (progress > 100){
-        progress = 100
-      }
-
-      if (progress > that.data.percent){
-        that.setData({percent: progress})
-      }
-
-      if (progress > media.mediaSubTitles[currentSeg].progress){
-        var updateProgressUrl = app.globalData.requestPrefix + 'UserStudyProgress/SetProgress/' + media.mediaSubTitles[currentSeg].id + '?progress=' + progress + '&sessionKey=' + encodeURIComponent(app.globalData.sessionKey)
-        wx.request({
-          url: updateProgressUrl,
-          method: 'GET',
-          success:(res)=>{
-            console.log('Set Progress:', res)
-            media.mediaSubTitles[currentSeg].progress = progress
-            that.setData({currentSeg: currentSeg, percent: progress, media: media})
-          }
-        })
-      }
-
+     
     })
     that.audio.onPause(()=>{
       console.log('paused')
-      that.setData({currentTime: that.audio.currentTime, isPlaying: false})
+      if (that.timeMeter != null && that.timeMeter != undefined){
+        clearInterval(that.timeMeter)
+      }
+      that.setData({currentTime: that.audio.currentTime, isPlaying: false, isPlayingMeterRun: false})  
+      
     })
     that.audio.onSeeked(()=>{
       console.log('seeked')
@@ -241,6 +257,11 @@ Page({
     else{
       that.setData({message: '顺序播放'})
       that.audio.src = that.data.remoteMediaUrl
+      that.data.currentTime = 0
+      that.timeMeter = setInterval(()=>{
+        that.data.currentTime++
+        that.setProgress(that.data.currentTime)
+      }, 1000)
       that.audio.play()
     }
   },
@@ -248,6 +269,9 @@ Page({
     console.log('pause button pressed')
     var that = this
     that.setData({currentTime: that.audio.currentTime})
+    if (that.timeMeter != null && that.timeMeter != undefined){
+      clearInterval(that.timeMeter)
+    }
     that.audio.pause()
   },
   /**
