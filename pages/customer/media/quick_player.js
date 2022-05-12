@@ -182,7 +182,7 @@ Page({
       if (!that.data.isPlaying){
         that.setData({isPlaying: true})
       }
-      if (that.audio.src == that.data.localMediaUrl){
+      if (that.audio.src != that.data.remoteMediaUrl){
         that.setProgress(that.audio.currentTime)
       }
      
@@ -197,7 +197,7 @@ Page({
     })
     that.audio.onSeeked(()=>{
       console.log('seeked')
-      that.setData({message: '跳转完成'})
+      that.setData({message: '跳转完成', isPlaying: true})
       that.audio.play()
     })
     that.audio.onSeeking(()=>{
@@ -207,7 +207,7 @@ Page({
         if (!that.data.isPlaying){
           that.audio.play()
         }
-      }, 2000);
+      }, 5000);
     })
   },
   play: function(e){
