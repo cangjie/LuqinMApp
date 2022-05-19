@@ -316,5 +316,16 @@ Page({
    */
   onShareAppMessage() {
 
+  },
+  handleContact(e) {
+    console.log('contact:', e)
+    wx.requestSubscribeMessage({
+      tmplIds: ['SfJLu70mJCZ0RNskHeEznILvwHMibYIWu9pgZ3EqJ4U',
+        'X0VzPuS1TpHvehKPJIA30fX9RW0uU9QBZP4j06gTJpw',
+        's5LqBjHSqL1CyDQWZkyhA-1u7HjF0ME_P8XSM2eBtME'],
+      success:(res)=>{
+        console.log('subscribe message:', res)
+      }
+    })
   }
 })

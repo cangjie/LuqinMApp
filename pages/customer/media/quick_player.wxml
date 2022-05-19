@@ -45,3 +45,4 @@
     </view>
   </view>
 </view>
+<view><button open-type="contact" bindtap="handleContact" >联系客服</button></view>
