@@ -1,0 +1,3 @@
+<mp-navigation-bar title="支付测试" loading="" back="" ></mp-navigation-bar>
+<input style="text-align: center;" type="text" bindinput="setAmount" />
+<button bindtap="testPay" > 支 付 测 试 </button>

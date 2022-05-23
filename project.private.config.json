@@ -22,6 +22,13 @@
           "query": "id=4",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/customer/payment/payment_test",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
