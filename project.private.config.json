@@ -25,7 +25,7 @@
         },
         {
           "name": "",
-          "pathName": "pages/customer/payment/payment_test",
+          "pathName": "pages/customer/poster/view_result",
           "query": "",
           "launchMode": "default",
           "scene": null

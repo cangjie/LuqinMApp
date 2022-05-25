@@ -1,0 +1,13 @@
+<mp-navigation-bar title="海报推广结果" loading="" back="" ></mp-navigation-bar>
+<view style="height: 50rpx;"></view>
+<view style="display:flex; flex-direction: row;">
+  <view style="width: 200rpx;text-align: center;">日期</view>
+  <view style="width: 300rpx;text-align: center;">海报二维码识别数</view>
+  <view style="width: 250rpx;text-align: center;">实际关注数</view>
+</view>
+<view style="height: 1rpx; background-color: #f0f0f0;margin-top: 10rpx;margin-bottom: 10rpx;" ></view>
+<view style="display:flex; flex-direction: row;" wx:for="{{result}}">
+  <view style="width: 200rpx;text-align: center;color: gray;">{{item.dateStr}}</view>
+  <view style="width: 300rpx;text-align: center;color: gray;">{{item.scanNum}}</view>
+  <view style="width: 250rpx;text-align: center;color: gray;">{{item.followNum}}</view>
+</view>

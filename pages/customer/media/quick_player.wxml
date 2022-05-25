@@ -9,7 +9,7 @@
   </view>
   <view style="margin-top: 40rpx;margin-left: 10rpx; margin-right: 10rpx;">
     <view style="display: flex;flex-direction: row; height: 100rpx;">
-      <view style="margin-left: 20rpx;width: 60%; margin-top: 20rpx;font-weight: bold;font-size: 15pt;">{{media.mediaSubTitles[currentSeg].title}}</view>
+      <view style="margin-left: 20rpx;width: 60%; margin-top: 20rpx;font-weight: bold;font-size: 13pt;">{{media.mediaSubTitles[currentSeg].title}}</view>
       <view class="memo-font" style="text-align: right;margin-top: 50rpx;">{{message}}</view>
     </view>
     <progress wx:if="{{currentStatus=='loading'}}" percent="{{percent}}" color="gray"></progress>

@@ -9,7 +9,8 @@
     "pages/customer/poster/poster",
     "pages/customer/poster/landing",
     "pages/customer/media/quick_player",
-    "pages/customer/payment/payment_test"
+    "pages/customer/payment/payment_test",
+    "pages/customer/poster/view_result"
   ],
   "window": {
     "backgroundTextStyle": "light",
