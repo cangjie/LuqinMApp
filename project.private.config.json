@@ -7,13 +7,15 @@
         {
           "name": "poster",
           "pathName": "pages/customer/poster/poster",
-          "query": "",
+          "query": "id=590",
+          "launchMode": "default",
           "scene": null
         },
         {
           "name": "landing",
           "pathName": "pages/customer/poster/landing",
-          "query": "id=4",
+          "query": "id=590",
+          "launchMode": "default",
           "scene": 1012
         },
         {
@@ -26,6 +28,13 @@
         {
           "name": "",
           "pathName": "pages/customer/poster/view_result",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/index/index",
           "query": "",
           "launchMode": "default",
           "scene": null

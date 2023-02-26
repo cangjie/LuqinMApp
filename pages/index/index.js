@@ -18,9 +18,14 @@ Page({
     })
   },
   onLoad() {
+    wx.redirectTo({
+      url: '../customer/sign_up/british_2023',
+    })
+    /*
     wx.navigateTo({
       url: '../customer/question/question_submit'
     })
+    */
     if (wx.getUserProfile) {
       this.setData({
         canIUseGetUserProfile: true

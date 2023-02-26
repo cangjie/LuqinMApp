@@ -1,0 +1,6 @@
+/* pages/customer/sign_up/british_2023.wxss */
+.input_border{
+  border-style: solid;
+  border-width: 1rpx;
+  border-color: #C0C0C0;
+}

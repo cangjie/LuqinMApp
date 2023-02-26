@@ -1,0 +1,34 @@
+<cover-image style="position:fixed;top: 0rpx"  wx:if="{{success}}" src="https://mini.luqinwenda.com/images/sign_up/british_2023/success.png" bindtap="hide" ></cover-image>
+<view style="background-color:#1d2b6c;" >
+  <image style="width: 750rpx;" mode="widthFix" src="http://mini.luqinwenda.com/images/sign_up/british_2023/1.jpg"></image>
+</view>
+<view style="background-color:#1d2b6c;">
+  <view style="text-align: center;margin-left: 125rpx;margin-top: 0rpx;" >
+    <input id="name" style="width: 500rpx;height: 70rpx;color: white;" class="input_border" placeholder="输入您的称呼" bindinput="setInput"  />
+  </view>
+  <view style="text-align: center;margin-left: 125rpx;margin-top: 50rpx;" >
+    <input id="cell" style="width: 500rpx;height: 70rpx;color: white;" class="input_border" placeholder="输入您的手机号" bindinput="setInput"  />
+  </view>
+  <view style="text-align: center; color: white;font-size: 7pt;margin-top: 20rpx;">本次报名为预报名，正式报名日期为3月20日。</view>
+  <view style="text-align: center;margin-left: 125rpx;margin-top: 50rpx;background-color:#1d2b6c;" >
+    <button style="width: 500rpx;margin-left: 0rpx;padding-left: 0rpx;background-color:#1d2b6c;" bindtap="submit">
+      <image mode="widthFix" src="https://mini.luqinwenda.com/images/sign_up/british_2023/button.png" style="width: 500rpx; margin-left: 0rpx;"  ></image>
+    </button>
+  </view>
+</view>
+<view style="background-color:#1b2761;" >
+  <image style="width: 750rpx;background-color:#272E65;" mode="widthFix" src="https://mini.luqinwenda.com/images/sign_up/british_2023/2.jpg"></image>
+</view>
+<!--view>
+  <view style="text-align: center;margin-left: 125rpx;margin-top: 25rpx;" >
+    <input id="name" style="width: 500rpx;height: 70rpx;" class="input_border" placeholder="输入您的称呼" bindinput="setInput"  />
+  </view>
+  <view style="text-align: center;margin-left: 125rpx;margin-top: 50rpx;" >
+    <input id="cell" style="width: 500rpx;height: 70rpx;" class="input_border" placeholder="输入您的手机号" bindinput="setInput"  />
+  </view>
+  <view style="text-align: center;margin-left: 125rpx;margin-top: 50rpx;" >
+    <button style="width: 500rpx;margin-left: 0rpx;padding-left: 0rpx;" bindtap="submit">
+      <image src="https://mini.luqinwenda.com/images/sign_up/british_2023/button.png" style="width: 500rpx;height: 60rpx;; margin-left: 0rpx;"  ></image>
+    </button>
+  </view>
+</view-->
