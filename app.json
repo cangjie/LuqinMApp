@@ -10,11 +10,7 @@
     "pages/customer/poster/landing",
     "pages/customer/media/quick_player",
     "pages/customer/payment/payment_test",
-<<<<<<< HEAD
-    "pages/customer/poster/view_result"
-=======
     "pages/customer/sign_up/british_2023"
->>>>>>> payment
   ],
   "window": {
     "backgroundTextStyle": "light",
