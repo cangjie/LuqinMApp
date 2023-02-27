@@ -3,4 +3,5 @@
   border-style: solid;
   border-width: 1rpx;
   border-color: #C0C0C0;
+  border-width: 5rpx;
 }

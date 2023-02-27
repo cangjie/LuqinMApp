@@ -1,34 +1,104 @@
 <cover-image style="position:fixed;top: 0rpx"  wx:if="{{success}}" src="https://mini.luqinwenda.com/images/sign_up/british_2023/success.png" bindtap="hide" ></cover-image>
-<view style="background-color:#1d2b6c;" >
-  <image style="width: 750rpx;" mode="widthFix" src="http://mini.luqinwenda.com/images/sign_up/british_2023/1.jpg"></image>
+<view style="background-color:#1d2b6c;margin-bottom: 0rpx;padding-bottom: 0rpx;height: 1060rpx;" >
+  <image style="width: 750rpx;margin-bottom: 0rpx;padding-bottom: 0rpx;" mode="widthFix" src="http://mini.luqinwenda.com/images/sign_up/british_2023/1.jpg"></image>
 </view>
-<view style="background-color:#1d2b6c;">
+<view style="background-color:#1d2b6c;background: url(http://mini.luqinwenda.com/images/sign_up/british_2023/bottom.jpg);background-size: 750rpx; background-repeat: no-repeat; margin-top: 0rpx;">
   <view style="text-align: center;margin-left: 125rpx;margin-top: 0rpx;" >
-    <input id="name" style="width: 500rpx;height: 70rpx;color: white;" class="input_border" placeholder="输入您的称呼" bindinput="setInput"  />
+    <input id="name" style="width: 500rpx;height: 70rpx;color: white;text-align: left;border-radius: 15rpx;margin-left: 10rpx;" class="input_border" placeholder="输入您的称呼" bindinput="setInput"  />
   </view>
   <view style="text-align: center;margin-left: 125rpx;margin-top: 50rpx;" >
-    <input id="cell" style="width: 500rpx;height: 70rpx;color: white;" class="input_border" placeholder="输入您的手机号" bindinput="setInput"  />
+    <input id="cell" style="width: 500rpx;height: 70rpx;color: white;text-align: left;border-radius: 15rpx;margin-left: 10rpx;" class="input_border" placeholder="输入您的手机号" bindinput="setInput"  />
   </view>
-  <view style="text-align: center; color: white;font-size: 7pt;margin-top: 20rpx;">本次报名为预报名，正式报名日期为3月20日。</view>
-  <view style="text-align: center;margin-left: 125rpx;margin-top: 50rpx;background-color:#1d2b6c;" >
-    <button style="width: 500rpx;margin-left: 0rpx;padding-left: 0rpx;background-color:#1d2b6c;" bindtap="submit">
-      <image mode="widthFix" src="https://mini.luqinwenda.com/images/sign_up/british_2023/button.png" style="width: 500rpx; margin-left: 0rpx;"  ></image>
-    </button>
+  <view style="text-align: center; color: #596a8f;font-size: 9pt;margin-top: 20rpx;">本次报名为预报名，正式报名日期为3月20日。</view>
+  <view style="text-align: center;margin-left: 125rpx;margin-top: 50rpx;background-color:#1d2b6c;height: 75rpx;" >
+    <button style="text-align: center; width: 500rpx;margin-left: 10rpx;padding-left: 60rpx;background-color:#BD1922;font:bold 思源宋体;color: white;border-radius: 50rpx;" bindtap="submit"> 立 即 领 取 优 惠 </button>
+  </view>
+  <view style="height:150rpx;padding-top: 50rpx;background-color:#202c68" >
+    <swiper style="width: 700rpx; height: 80rpx;border-style: solid;border-color:#313970; border-width: 10rpx;margin-left:25rpx;border-radius: 20rpx;" 
+    indicator-dots="{{false}}" autoplay="{{true}}" duration="{{500}}" vertical="{{true}}" >
+      <swiper-item wx:for="{{list}}" >
+        <view style="display: flex; flex-direction: row;margin-top: 15rpx; margin-left: 10rpx;margin-bottom: 10rpx;" >
+          <view style="width: 50rpx;">
+            <image style="width: 50rpx;" mode="widthFix" src="https://mini.luqinwenda.com/images/sign_up/british_2023/horn.png" ></image>
+          </view>
+          <view style="width: 200rpx;margin-left: 50rpx;color: white;">{{item.filled_name}}</view>
+          <view style="width: 250rpx;color: white">{{item.filled_cell}}</view>
+          <view style="display: flex;flex-direction: row; width: 350rpx;text-align: right;color:white;margin-right: 20rpx;">
+            <view style="width: 50rpx;" ></view>
+            <view style="width: 200rpx;background-color: #405176;margin-bottom: 20rpx;text-align: center;border-radius: 50rpx;" >{{item.memo}}</view> 
+          </view>
+        </view>
+      </swiper-item>
+      <!--swiper-item>
+        <view style="display: flex; flex-direction: row;margin-top: 15rpx; margin-left: 10rpx;margin-bottom: 10rpx;" >
+          <view style="width: 50rpx;">
+            <image style="width: 50rpx;" mode="widthFix" src="https://mini.luqinwenda.com/images/sign_up/british_2023/horn.png" ></image>
+          </view>
+          <view style="width: 150rpx;margin-left: 50rpx;color: white;">苍*</view>
+          <view style="width: 150rpx;color: white">135****7897</view>
+          <view style="display: flex;flex-direction: row; width: 350rpx;text-align: right;color:white;margin-right: 20rpx;">
+            <view style="width: 150rpx;" ></view>
+            <view style="width: 200rpx;background-color: #405176;margin-bottom: 20rpx;text-align: center;border-radius: 50rpx;" >1小时前报名</view> 
+          </view>
+        </view>
+      </swiper-item-->
+    </swiper>
+  </view>
+  <view style="text-align: center; font-size: 10pt ;color: #96A2AB; font:bolder;height: 100rpx;display: flex;flex-direction: row;background-color: #1F2C68;">
+    <view style="text-align: right;width: 500rpx;">报名负责人：新老师  联系电话：</view>
+    <button style="width: 150rpx;font-size: 10pt;height:50rpx; background-color: #1F2C68; margin: 0rpx;padding: 0rpx;color: #96A2AB" bindtap="call" >18601016361</button>
   </view>
 </view>
-<view style="background-color:#1b2761;" >
+<view style="background-color:#1F2C68;" >
   <image style="width: 750rpx;background-color:#272E65;" mode="widthFix" src="https://mini.luqinwenda.com/images/sign_up/british_2023/2.jpg"></image>
 </view>
-<!--view>
-  <view style="text-align: center;margin-left: 125rpx;margin-top: 25rpx;" >
-    <input id="name" style="width: 500rpx;height: 70rpx;" class="input_border" placeholder="输入您的称呼" bindinput="setInput"  />
+<view style="background-color:#1F2C68;margin-top: 0rpx;">
+  <view style="font:bolder; color: #fae3c9; height: 80rpx;text-align: center;font-size: 15pt;">限时优惠｜预约2023英国游学夏令营名额</view>
+  <view style="text-align: center;margin-left: 125rpx;margin-top: 0rpx;" >
+    <input id="name" style="width: 500rpx;height: 70rpx;color: white;text-align: left;border-radius: 15rpx;margin-left: 10rpx;" class="input_border" placeholder="输入您的称呼" bindinput="setInput"  />
   </view>
   <view style="text-align: center;margin-left: 125rpx;margin-top: 50rpx;" >
-    <input id="cell" style="width: 500rpx;height: 70rpx;" class="input_border" placeholder="输入您的手机号" bindinput="setInput"  />
+    <input id="cell" style="width: 500rpx;height: 70rpx;color: white;text-align: left;border-radius: 15rpx;margin-left: 10rpx;" class="input_border" placeholder="输入您的手机号" bindinput="setInput"  />
   </view>
-  <view style="text-align: center;margin-left: 125rpx;margin-top: 50rpx;" >
-    <button style="width: 500rpx;margin-left: 0rpx;padding-left: 0rpx;" bindtap="submit">
-      <image src="https://mini.luqinwenda.com/images/sign_up/british_2023/button.png" style="width: 500rpx;height: 60rpx;; margin-left: 0rpx;"  ></image>
-    </button>
+  <view style="text-align: center; color: #596a8f;font-size: 9pt;margin-top: 20rpx;">
+    本次报名为预报名，正式报名日期为3月20日。
   </view>
-</view-->
+  <view style="text-align: center;margin-left: 125rpx;margin-top: 50rpx;background-color:#1d2b6c;height: 75rpx;" >
+    <button style="text-align: center; width: 500rpx;margin-left: 10rpx;padding-left: 60rpx;background-color:#BD1922;font:bold 思源宋体;color: white;border-radius: 50rpx;" bindtap="submit"> 立 即 领 取 优 惠 </button>
+  </view>
+  <view style="height:150rpx;padding-top: 50rpx;">
+    <swiper style="width: 700rpx; height: 80rpx;border-style: solid;border-color:#313970; border-width: 10rpx;margin-left:25rpx;border-radius: 20rpx;" 
+    indicator-dots="{{false}}" autoplay="{{true}}" duration="{{500}}" vertical="{{true}}" >
+    <swiper-item wx:for="{{list}}" >
+        <view style="display: flex; flex-direction: row;margin-top: 15rpx; margin-left: 10rpx;margin-bottom: 10rpx;" >
+          <view style="width: 50rpx;">
+            <image style="width: 50rpx;" mode="widthFix" src="https://mini.luqinwenda.com/images/sign_up/british_2023/horn.png" ></image>
+          </view>
+          <view style="width: 200rpx;margin-left: 50rpx;color: white;">{{item.filled_name}}</view>
+          <view style="width: 250rpx;color: white">{{item.filled_cell}}</view>
+          <view style="display: flex;flex-direction: row; width: 350rpx;text-align: right;color:white;margin-right: 20rpx;">
+            <view style="width: 50rpx;" ></view>
+            <view style="width: 200rpx;background-color: #405176;margin-bottom: 20rpx;text-align: center;border-radius: 50rpx;" >{{item.memo}}</view> 
+          </view>
+        </view>
+      </swiper-item>
+      <!--swiper-item>
+        <view style="display: flex; flex-direction: row;margin-top: 15rpx; margin-left: 10rpx;margin-bottom: 10rpx;" >
+          <view style="width: 50rpx;">
+            <image style="width: 50rpx;" mode="widthFix" src="https://mini.luqinwenda.com/images/sign_up/british_2023/horn.png" ></image>
+          </view>
+          <view style="width: 150rpx;margin-left: 50rpx;color: white;">苍*</view>
+          <view style="width: 150rpx;color: white">135****7897</view>
+          <view style="display: flex;flex-direction: row; width: 350rpx;text-align: right;color:white;margin-right: 20rpx;">
+            <view style="width: 150rpx;" ></view>
+            <view style="width: 200rpx;background-color: #405176;margin-bottom: 20rpx;text-align: center;border-radius: 50rpx;" >1小时前报名</view> 
+          </view>
+        </view>
+      </swiper-item-->
+    </swiper>
+  </view>
+  <view style="text-align: center; font-size: 10pt ;color: #96A2AB; font:bolder;height: 100rpx;display: flex;flex-direction: row;">
+    <view style="text-align: right;width: 500rpx;">报名负责人：新老师  联系电话：</view>
+    <button style="width: 150rpx;font-size: 10pt;height:50rpx; background-color: #1F2C68; margin: 0rpx;padding: 0rpx;color: #96A2AB" bindtap="call" >18601016361</button>
+  </view>
+</view>

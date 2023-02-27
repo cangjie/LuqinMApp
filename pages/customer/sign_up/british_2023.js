@@ -71,12 +71,26 @@ Page({
     var that = this
     that.setData({success: false})
   },
-
+ call(){
+  wx.makePhoneCall({
+    phoneNumber: '18601016361',
+  })
+ },
   /**
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-
+    var that = this
+    var url = app.globalData.requestPrefix + 'Reserve/GetAdList'
+    wx.request({
+      url: url,
+      method: 'GET',
+      success:(res)=>{
+        if (res.statusCode == 200){
+          that.setData({list: res.data})
+        }
+      }
+    })
   },
 
   /**
