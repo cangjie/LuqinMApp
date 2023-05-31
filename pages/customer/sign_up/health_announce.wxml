@@ -1,0 +1,94 @@
+<view>
+  <image style="width: 750rpx;margin-bottom: 0rpx;padding-bottom: 0rpx;" mode="widthFix" src="http://mini.luqinwenda.com/images/sign_up/british_2023/health.png"></image>
+  <view style="margin-left: 20rpx;margin-right: 15rpx;">
+    <text style="color: #f2ab40;margin-top: 30rpx;margin-bottom: 10rpx;height: 150rpx;font:bolder;" decode="true" >
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;尊敬的家长：您好！为了孩子的健康成长，避免在夏令营活动中出现意外，请您如实填写学生健康调查表，谢谢合作！
+  </text>
+  </view>
+  <view style="height: 70rpx;margin-top: 50rpx;" class="item_title"><b style="color: white;">姓名：</b></view>
+  <view wx:if="{{status == 0}}" class="item_title" >
+    <input style="width: 300rpx;background-color: white;" placeholder="请填写姓名" value="{{submitData.name}}" bindinput="setName" />
+  </view>
+  <view wx:else class="item_title" ><b style="color: white;">{{submitData.name}}</b></view>
+  
+  
+  <view class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">您的孩子是否有以下情况：（多选）</b></view>
+  <block wx:if="{{status == 0}}" >
+    <view class="item_title" >
+      <checkbox-group bindchange="setDisease">
+        <checkbox style="color: white;" value="无" checked="{{submitData.disease == '无'}}" >无</checkbox>
+        <checkbox style="color: white;" value="癫痫" checked="{{diseaseDianxian}}" >癫痫</checkbox>
+        <checkbox style="color: white;" value="抑郁症" checked="{{diseaseYiyuzheng}}" >抑郁症</checkbox>
+        <checkbox style="color: white;" value="晕车、晕机" checked="{{diseaseYunche}}" >晕车、晕机</checkbox>
+        <checkbox style="color: white;" value="高血压" checked="{{diseaseGaoxueya}}" >高血压</checkbox>
+        <checkbox style="color: white;" value="哮喘" checked="{{diseaseXiaochuan}}" >哮喘</checkbox>
+        <checkbox style="color: white;" value="其他" checked="{{diseaseQita}}" >其他</checkbox>
+      </checkbox-group>
+    </view>
+    <view wx:if="{{diseaseYiyuzheng}}" class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">抑郁症程度：</b></view>
+    <view wx:if="{{diseaseYiyuzheng}}" class="item_title">
+      <radio-group id="depressionLevel" bindchange="setRadio" >
+        <radio style="color: white;width: 200rpx;" checked="{{submitData.depression_level=='轻度'}}" value="轻度" >轻度</radio>
+        <radio style="color: white;width: 200rpx;" checked="{{submitData.depression_level=='中度'}}" value="中度" >中度</radio>
+        <radio style="color: white;width: 200rpx;" checked="{{submitData.depression_level=='重度'}}" value="重度" >重度</radio> 
+      </radio-group>
+    </view>
+    <view wx:if="{{diseaseQita}}" class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">请说明您孩子还有什么其他疾病：</b></view>
+    <view wx:if="{{diseaseQita}}" class="item_title">
+      <textarea id="txtQita" bindinput="setText" style="height: 200rpx;width: 700rpx;background-color: white;" placeholder="150字以内"></textarea>
+    </view>
+  </block>
+  <block wx:else >
+
+  </block>
+  
+
+  <view class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">您的孩子是否是过敏体质？</b></view>
+  <view class="item_title">
+    <radio-group id="allergy" bindchange="setRadio">
+      <radio style="color: white;width: 200rpx;" value="0" checked="{{submitData.is_allergy == 0}}" >否</radio>
+      <radio style="color: white;" value="1" checked="{{submitData.is_allergy == 1}}" >是</radio>
+    </radio-group>
+  </view>
+  <view wx:if="{{submitData.is_allergy == 1}}" class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">请详细说明您孩子对什么过敏：</b></view>
+  <view class="item_title" wx:if="{{submitData.is_allergy == 1}}" >
+    <textarea id="txtAllergy" bindinput="setText" style="height: 150rpx;width: 700rpx;background-color: white;" placeholder="50字以内"></textarea>
+  </view>
+
+  <view class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">您的孩子有因身体疾病长期服用药物吗？</b></view>
+  <view class="item_title">
+    <radio-group id="drug" bindchange="setRadio">
+      <radio style="color: white;width: 200rpx;" checked="{{submitData.use_drug == 0}}" value="0" >无</radio>
+      <radio style="color: white;" checked="{{submitData.use_drug == 1}}" value="1" >有</radio>
+    </radio-group>
+  </view>
+  <view wx:if="{{submitData.use_drug == 1}}" class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">请详细说明您孩子的病情及所用药物：</b></view>
+  <view class="item_title" wx:if="{{submitData.use_drug == 1}}"  >
+    <textarea id="txtDrug" bindinput="setText" style="height: 200rpx;width: 700rpx;background-color: white;" placeholder="150字以内"></textarea>
+  </view>
+
+  <view class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">您需要我们向您的孩子提供特殊的医疗照顾吗？</b></view>
+  <view class="item_title">
+    <radio-group id="service" bindchange="setRadio" >
+      <radio style="color: white;width: 200rpx;" checked="{{submitData.need_others_service == 0}}" value="0" >无</radio>
+      <radio style="color: white;" checked="{{submitData.need_others_service == 1}}" value="1" >有</radio>
+    </radio-group>
+  </view>
+  <view wx:if="{{submitData.need_others_service == 1}}" class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">请详细说明您孩子需要什么特殊的医疗照顾：</b></view>
+  <view class="item_title" wx:if="{{submitData.need_others_service == 1}}">
+    <textarea id="txtService" bindinput="setText" style="height: 150rpx;width: 700rpx;background-color: white;" placeholder="50字以内"></textarea>
+  </view>
+  <view class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">您的孩子是否有与户外活动相关的疾病史或特殊注意事项？</b></view>
+  <view class="item_title">
+    <radio-group id="sportDisease" bindchange="setRadio" >
+      <radio style="color: white;width: 200rpx;" checked="{{submitData.have_sport_disease == 0}}" value="0" >无</radio>
+      <radio style="color: white;" checked="{{submitData.have_sport_disease == 1}}" value="1" >有</radio>
+    </radio-group>
+  </view>
+  <view wx:if="{{submitData.have_sport_disease == 1}}" class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">请详细说明您孩子与户外活动相关的疾病史和注意事项：</b></view>
+  <view class="item_title" wx:if="{{submitData.have_sport_disease == 1}}">
+    <textarea id="txtSportDisease" bindinput="setText" style="height: 200rpx;width: 700rpx;background-color: white;" placeholder="150字以内"></textarea>
+  </view>
+  <view style="margin-top: 100rpx;"><button style="border-radius: 50rpx;color:white; font:bolder; background-color: #f2ab40;"  bindtap="submit" > 提 交 </button></view>
+  <view style="height: 200rpx;"></view>
+</view>

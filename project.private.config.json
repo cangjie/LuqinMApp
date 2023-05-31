@@ -38,6 +38,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "health",
+          "pathName": "pages/customer/sign_up/health_announce",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
