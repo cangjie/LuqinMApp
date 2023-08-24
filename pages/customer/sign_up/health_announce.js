@@ -1,4 +1,5 @@
 // pages/customer/sign_up/health_announce.js
+const app = getApp()
 Page({
 
   /**
@@ -25,7 +26,8 @@ Page({
     diseaseGaoxueya: false,
     diseaseXiaochuan: false,
     diseaseQita: false,
-    status: 0
+    status: 0,
+    diseaseStrArr: []
   },
   setName(e){
     var that = this
@@ -49,10 +51,12 @@ Page({
     if (diseaseArr.length > 0){
       if (diseaseArr[diseaseArr.length - 1] == '无'){
         submitData.disease = '无'
-        
+        //var diseaseStrArr = ['无']
+        //that.setData({diseaseStrArr: diseaseStrArr})
       }
       else{
         var disease = ''
+        //var diseaseStrArr = []
         for(var i = 0; i < diseaseArr.length; i++){
           if (diseaseArr[i] != '无'){
             disease = disease + ((disease=='')?'':',') + diseaseArr[i]
@@ -60,24 +64,28 @@ Page({
           switch(diseaseArr[i]){
             case '癫痫':
               that.setData({diseaseDianxian: true})
+              //diseaseStrArr.push('癫痫')
               break
             case '抑郁症':
               that.setData({diseaseYiyuzheng: true})
+              //diseaseStrArr.push('抑郁症')
               break
-            case '过敏症':
-              that.setData({diseaseGuomin: true})
-              break
+            
             case '晕车、晕机':
               that.setData({diseaseYunche: true})
+              //diseaseStrArr.push('晕车、晕机')
               break
             case '高血压':
               that.setData({diseaseGaoxueya: true})
+              //diseaseStrArr.push('高血压')
               break
             case '哮喘':
               that.setData({diseaseXiaochuan: true})
+              //diseaseStrArr.push('哮喘')
               break
             case '其他':
               that.setData({diseaseQita: true})
+              //diseaseStrArr.push('其他')
               break
             default:
               break
@@ -113,6 +121,17 @@ Page({
         break
       case 'depressionLevel':
         submitData.depression_level = value
+        /*
+        var diseaseStrArr = that.data.diseaseStrArr
+        for(var i = 0; i < diseaseStrArr.length; i++){
+          if (diseaseStrArr[i].indexOf('抑郁症') == 0){
+            diseaseStrArr[i] = '抑郁症：' + value
+            break
+          }
+        }
+        
+        that.setData({diseaseStrArr: diseaseStrArr})
+        */
         break
       case 'allergy':
         submitData.is_allergy = parseInt(value)
@@ -134,12 +153,20 @@ Page({
         break
       case 'txtQita':
         submitData.other_diseases = value
+        /*
+        var diseaseStrArr = that.data.diseaseStrArr
+        for(var i = 0; i < diseaseStrArr.length; i++){
+          if (diseaseStrArr[i].indexOf('其他') == 0){
+            diseaseStrArr[i] = '其他：' + value
+            break
+          }
+        }
+        
+        that.setData({diseaseStrArr: diseaseStrArr})
+        */
         break
       case 'txtDrug':
         submitData.drugs_memo = value
-        break
-      case 'txtDiet':
-        submitData.diet_memo = value
         break
       case 'txtService':
         submitData.service_memo = value
@@ -160,6 +187,7 @@ Page({
     var msg = ''
     var that = this
     var submitData = that.data.submitData
+    
     if (submitData.name == ''){
       msg = '请填写姓名.'
       valid = false
@@ -189,6 +217,10 @@ Page({
       valid = false
     }
     if (valid){
+      var diseaseStr = submitData.disease
+      diseaseStr = diseaseStr.replace('抑郁症', '抑郁症：'+ submitData.depression_level)
+      diseaseStr = diseaseStr.replace('其他', '其他：'+ submitData.other_diseases)
+      that.setData({diseaseStr: diseaseStr})
       return true
     }
     wx.showModal({
@@ -207,10 +239,57 @@ Page({
     //else if (submitData.disease.indexOf(''))
     return valid
   },
+  save(){
+    var that = this
+    if (that.checkValid()){
+      that.setData({status: 1})
+    }
+    
+  },
+  mod(){
+    this.setData({status: 0})
+  },
   submit(){
     var that = this
-    that.checkValid()
-    that.setData({status: 1})
+    var submitData = that.data.submitData
+    var submitUrl = app.globalData.requestPrefix + 'Health/PostHealth'
+    wx.request({
+      url: submitUrl,
+      method: 'POST',
+      data: submitData,
+      success:(res)=>{
+        console.log(res)
+        if (res.statusCode != 200){
+          wx.showModal({
+            title: '提交失败',
+            content: '',
+            showCancel: false,
+            complete: (res) => {
+              
+          
+              if (res.confirm) {
+                return valid
+              }
+            }
+          })
+          return
+        }
+        wx.showModal({
+          title: '您孩子的情况，我们已经收到。',
+          content: '',
+          showCancel: false,
+          complete: (res) => {
+          
+            that.setData({status: 2})
+        
+            if (res.confirm) {
+              return valid
+            }
+          }
+        })
+      }
+
+    })
   },
   /**
    * Lifecycle function--Called when page load

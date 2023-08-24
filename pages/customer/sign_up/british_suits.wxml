@@ -1,0 +1,13 @@
+<view>
+  <image style="width: 750rpx;margin-bottom: 0rpx;padding-bottom: 0rpx;" mode="widthFix" src="http://mini.luqinwenda.com/images/sign_up/british_2023/WechatIMG760.png"></image>
+  <view style="margin-left: 20rpx;margin-right: 15rpx;">
+    <text  style="color: #f2ab40;margin-top: 30rpx;margin-bottom: 10rpx;height: 150rpx;font:bolder;" decode="true" >
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;特别提示: 本次大开眼界英国游学营的LOGO,由营员孔雀同学设计。
+    </text>
+    <view style="display: flex;flex-direction: row;" >
+      <image mode="scaleToFill" style="width: 250rpx;height: 250rpx; margin-left: 0rpx;margin-top: 50rpx;" src="http://mini.luqinwenda.com/images/sign_up/british_2023/WechatIMG756.jpeg"></image>
+      <image mode="scaleToFill" style="width: 250rpx;height: 250rpx;margin-left: 10rpx;margin-top: 50rpx;" src="http://mini.luqinwenda.com/images/sign_up/british_2023/WechatIMG755.jpeg"></image>
+      <image mode="scaleToFill" style="width: 250rpx;height: 250rpx; margin-left: 10rpx;margin-top: 50rpx;" src="http://mini.luqinwenda.com/images/sign_up/british_2023/coat.png"></image>
+    </view>
+  </view>
+</view>

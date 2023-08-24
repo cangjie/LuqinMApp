@@ -1,5 +1,4 @@
-// pages/customer/poster/view_result.js
-const app = getApp()
+// pages/customer/sign_up/british_suits.js
 Page({
 
   /**
@@ -13,23 +12,7 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-    var that = this
-    app.loginPromise.then((resovle)=>{
-      var getDataUrl = app.globalData.requestPrefix + 'Promote/GetPersonalPromoteResult?sessionKey=' + encodeURIComponent(app.globalData.sessionKey)
-      wx.request({
-        url: getDataUrl,
-        method: 'GET',
-        success:(res)=>{
-          console.log('promote result', res.data)
-          var r = res.data
-          for(var i = 0; i < r.length; i++){
-            var dateV = new Date(r[i].date.toString())
-            r[i].dateStr = dateV.getFullYear().toString() + '-' + (dateV.getMonth()+1).toString() + '-' + dateV.getDate().toString()
-          }
-          that.setData({result:r})
-        }
-      })
-    })
+
   },
 
   /**

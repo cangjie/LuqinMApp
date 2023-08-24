@@ -45,6 +45,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "suits",
+          "pathName": "pages/customer/sign_up/british_suits",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

@@ -11,7 +11,8 @@
     "pages/customer/media/quick_player",
     "pages/customer/payment/payment_test",
     "pages/customer/sign_up/british_2023",
-    "pages/customer/sign_up/health_announce"
+    "pages/customer/sign_up/health_announce",
+    "pages/customer/sign_up/british_suits"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,17 +1,18 @@
 <view>
   <image style="width: 750rpx;margin-bottom: 0rpx;padding-bottom: 0rpx;" mode="widthFix" src="http://mini.luqinwenda.com/images/sign_up/british_2023/health.png"></image>
   <view style="margin-left: 20rpx;margin-right: 15rpx;">
-    <text style="color: #f2ab40;margin-top: 30rpx;margin-bottom: 10rpx;height: 150rpx;font:bolder;" decode="true" >
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;尊敬的家长：您好！为了孩子的健康成长，避免在夏令营活动中出现意外，请您如实填写学生健康调查表，谢谢合作！
-  </text>
+    <text wx:if="{{status == 0}}" style="color: #f2ab40;margin-top: 30rpx;margin-bottom: 10rpx;height: 150rpx;font:bolder;" decode="true" >
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;尊敬的家长：您好！为了孩子的健康成长，避免在夏令营活动中出现意外，请您如实填写学生健康调查表，谢谢合作！
+    </text>
+    <text wx:if="{{status == 1}}" style="color: #f2ab40;margin-top: 30rpx;margin-bottom: 10rpx;height: 150rpx;font:bolder;" decode="true" >
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请再次核对您填写的信息，确认无误后，请点击提交按钮。
+    </text>
   </view>
   <view style="height: 70rpx;margin-top: 50rpx;" class="item_title"><b style="color: white;">姓名：</b></view>
   <view wx:if="{{status == 0}}" class="item_title" >
     <input style="width: 300rpx;background-color: white;" placeholder="请填写姓名" value="{{submitData.name}}" bindinput="setName" />
   </view>
   <view wx:else class="item_title" ><b style="color: white;">{{submitData.name}}</b></view>
-  
-  
   <view class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">您的孩子是否有以下情况：（多选）</b></view>
   <block wx:if="{{status == 0}}" >
     <view class="item_title" >
@@ -39,56 +40,79 @@
     </view>
   </block>
   <block wx:else >
-
+    <view class="item_title" style="height: 70rpx;margin-top: 50rpx;" >
+      <b style="color: white;" >{{diseaseStr}}</b>
+      <!--
+      <b wx:for="{{diseaseStrArr}}" style="color: white;" >
+        <b wx:if="{{index > 0}}" style="color: white;" >,</b>
+        {{item}}
+      </b>
+      -->
+    </view>
   </block>
   
 
   <view class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">您的孩子是否是过敏体质？</b></view>
-  <view class="item_title">
-    <radio-group id="allergy" bindchange="setRadio">
+  <view  class="item_title">
+    <radio-group wx:if="{{status == 0}}" id="allergy" bindchange="setRadio">
       <radio style="color: white;width: 200rpx;" value="0" checked="{{submitData.is_allergy == 0}}" >否</radio>
       <radio style="color: white;" value="1" checked="{{submitData.is_allergy == 1}}" >是</radio>
     </radio-group>
+    <b wx:else style="color: white;">{{submitData.is_allergy == 1?'是':'否'}}</b>
   </view>
+  
   <view wx:if="{{submitData.is_allergy == 1}}" class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">请详细说明您孩子对什么过敏：</b></view>
   <view class="item_title" wx:if="{{submitData.is_allergy == 1}}" >
-    <textarea id="txtAllergy" bindinput="setText" style="height: 150rpx;width: 700rpx;background-color: white;" placeholder="50字以内"></textarea>
+    <textarea wx:if="{{status == 0}}" id="txtAllergy" bindinput="setText" style="height: 150rpx;width: 700rpx;background-color: white;" placeholder="50字以内" value="{{submitData.allergy}}" ></textarea>
+    <b wx:else style="color: white;">{{submitData.allergy}}</b>
   </view>
 
   <view class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">您的孩子有因身体疾病长期服用药物吗？</b></view>
   <view class="item_title">
-    <radio-group id="drug" bindchange="setRadio">
+    <radio-group wx:if="{{status == 0}}" id="drug" bindchange="setRadio">
       <radio style="color: white;width: 200rpx;" checked="{{submitData.use_drug == 0}}" value="0" >无</radio>
       <radio style="color: white;" checked="{{submitData.use_drug == 1}}" value="1" >有</radio>
     </radio-group>
+    <b wx:else style="color: white;">{{submitData.use_drug == 1?'有':'无'}}</b>
   </view>
   <view wx:if="{{submitData.use_drug == 1}}" class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">请详细说明您孩子的病情及所用药物：</b></view>
   <view class="item_title" wx:if="{{submitData.use_drug == 1}}"  >
-    <textarea id="txtDrug" bindinput="setText" style="height: 200rpx;width: 700rpx;background-color: white;" placeholder="150字以内"></textarea>
+    <textarea wx:if="{{status == 0}}" id="txtDrug" bindinput="setText" style="height: 200rpx;width: 700rpx;background-color: white;" placeholder="150字以内" value="{{submitData.drugs_memo}}"></textarea>
+    <b wx:else style="color: white;">{{submitData.drugs_memo}}</b>
   </view>
 
   <view class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">您需要我们向您的孩子提供特殊的医疗照顾吗？</b></view>
-  <view class="item_title">
-    <radio-group id="service" bindchange="setRadio" >
+  <view class="item_title" style="margin-top: 50rpx;">
+    <radio-group wx:if="{{status == 0}}" id="service" bindchange="setRadio" >
       <radio style="color: white;width: 200rpx;" checked="{{submitData.need_others_service == 0}}" value="0" >无</radio>
       <radio style="color: white;" checked="{{submitData.need_others_service == 1}}" value="1" >有</radio>
     </radio-group>
+    <b wx:else style="color: white;">{{submitData.need_others_service == 1?'有':'无'}}</b>
   </view>
   <view wx:if="{{submitData.need_others_service == 1}}" class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">请详细说明您孩子需要什么特殊的医疗照顾：</b></view>
   <view class="item_title" wx:if="{{submitData.need_others_service == 1}}">
-    <textarea id="txtService" bindinput="setText" style="height: 150rpx;width: 700rpx;background-color: white;" placeholder="50字以内"></textarea>
+    <textarea wx:if="{{status == 0}}" id="txtService" bindinput="setText" style="height: 150rpx;width: 700rpx;background-color: white;" placeholder="50字以内" value="{{submitData.service_memo}}" ></textarea>
+    <b wx:else style="color: white;">{{submitData.service_memo}}</b>
   </view>
   <view class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">您的孩子是否有与户外活动相关的疾病史或特殊注意事项？</b></view>
-  <view class="item_title">
-    <radio-group id="sportDisease" bindchange="setRadio" >
+  <view class="item_title" style="margin-top: 50rpx;" >
+    <radio-group wx:if="{{status == 0}}" id="sportDisease" bindchange="setRadio" >
       <radio style="color: white;width: 200rpx;" checked="{{submitData.have_sport_disease == 0}}" value="0" >无</radio>
       <radio style="color: white;" checked="{{submitData.have_sport_disease == 1}}" value="1" >有</radio>
     </radio-group>
+    <b wx:else style="color: white;">{{submitData.have_sport_disease == 1?'有':'无'}}</b>
   </view>
   <view wx:if="{{submitData.have_sport_disease == 1}}" class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">请详细说明您孩子与户外活动相关的疾病史和注意事项：</b></view>
-  <view class="item_title" wx:if="{{submitData.have_sport_disease == 1}}">
-    <textarea id="txtSportDisease" bindinput="setText" style="height: 200rpx;width: 700rpx;background-color: white;" placeholder="150字以内"></textarea>
+  <view class="item_title" wx:if="{{submitData.have_sport_disease == 1}}" style="margin-top: 50rpx;">
+    <textarea wx:if="{{status == 0}}" id="txtSportDisease" bindinput="setText" style="height: 200rpx;width: 700rpx;background-color: white;" placeholder="150字以内" value="{{submitData.sport_disease_memo}}" ></textarea>
+    <b wx:else style="color: white;">{{submitData.sport_disease_memo}}</b>
   </view>
-  <view style="margin-top: 100rpx;"><button style="border-radius: 50rpx;color:white; font:bolder; background-color: #f2ab40;"  bindtap="submit" > 提 交 </button></view>
+  <view wx:if="{{status == 0}}" style="margin-top: 100rpx;">
+    <button style="border-radius: 50rpx;color:white; font:bolder; background-color: #f2ab40;"  bindtap="save" > 保 存 </button>
+  </view>
+  <view wx:if="{{status == 1}}" style="margin-top: 100rpx;" style="display: flex;flex-direction: row;">
+    <button style="border-radius: 50rpx;color:white; font:bolder; background-color: #f2ab40;"  bindtap="mod" >返回修改</button>
+    <button style="border-radius: 50rpx;color:white; font:bolder; background-color: #f2ab40;"  bindtap="submit" >确认提交</button>
+  </view>
   <view style="height: 200rpx;"></view>
 </view>
