@@ -5,6 +5,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "ctu_2301",
+          "pathName": "pages/customer/registration/ctu_2301",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "poster",
           "pathName": "pages/customer/poster/poster",
           "query": "id=590",
@@ -42,13 +49,6 @@
         {
           "name": "health",
           "pathName": "pages/customer/sign_up/health_announce",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "suits",
-          "pathName": "pages/customer/sign_up/british_suits",
           "query": "",
           "launchMode": "default",
           "scene": null

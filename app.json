@@ -12,7 +12,8 @@
     "pages/customer/payment/payment_test",
     "pages/customer/sign_up/british_2023",
     "pages/customer/sign_up/health_announce",
-    "pages/customer/sign_up/british_suits"
+    "pages/customer/sign_up/british_suits",
+    "pages/customer/registration/ctu_2301"
   ],
   "window": {
     "backgroundTextStyle": "light",

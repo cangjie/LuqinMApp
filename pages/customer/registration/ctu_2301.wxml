@@ -1,0 +1,108 @@
+<view>
+  <image style="width: 750rpx;margin-bottom: 0rpx;padding-bottom: 0rpx;" mode="widthFix" src="http://mini.luqinwenda.com/images/ctu_2301.jpg"></image>
+  <view style="text-align: center;font-size: 13pt;font:bold">【报名表】少年纪录片制作人</view>
+  <view style="text-align: center;font-size: 10pt;">（2024年1月25日-2月4日（11天））</view>
+  <view style="margin-left: 20rpx;margin-right: 15rpx;">
+    <text wx:if="{{status == 0}}" style="margin-top: 30rpx;margin-bottom: 10rpx;height: 150rpx;font:bolder;" decode="true" >
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;各位家长，欢迎孩子参加我们的2024年少年纪录片制作人寒假营活动。为确保卢勤老师能够更好地关注您的孩子，有针对性的辅导孩子参与活动，获得更大的收获，请您如实填写以下报名表（此信息我们会严格为您保密）。
+    </text>
+    <text wx:if="{{status == 1}}" style="color: #f2ab40;margin-top: 30rpx;margin-bottom: 10rpx;height: 150rpx;font:bolder;" decode="true" >
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请再次核对您填写的信息，确认无误后，请点击提交按钮。
+    </text>
+  </view>
+  <view style="height: 70rpx;margin-top: 50rpx;" class="item_title">营员姓名：</view>
+  <view wx:if="{{status == 0}}" class="item_title" >
+    <input style="width: 300rpx;background-color: white;color:gray" placeholder="请填写姓名" value="{{submitData.name}}" bindinput="setName" />
+  </view>
+  <view style="height: 70rpx;margin-top: 50rpx;" class="item_title">营员性别：</view>
+  <view wx:if="{{status == 0}}" class="item_title" >
+    <radio-group>
+      <radio style="margin-left: 30rpx;" >男</radio><radio style="margin-left: 30rpx;" >女</radio>
+    </radio-group>
+  </view>
+  <view style="height: 70rpx;margin-top: 50rpx;" class="item_title">营员年龄：</view>
+  <view wx:if="{{status == 0}}" class="item_title" >
+    <input style="background-color: white;color:gray; width:150rpx"  placeholder="几周岁？" value="{{submitData.name}}" bindinput="setName" />
+  </view>
+  <view style="height: 70rpx;margin-top: 50rpx;" class="item_title">所在省市：</view>
+  <view wx:if="{{status == 0}}" class="item_title" >
+    <picker mode="region" level="province" >
+      <picker-view>请选择。。。</picker-view>
+    </picker> 
+  </view>
+  <view style="height: 70rpx;margin-top: 50rpx;" class="item_title">营员身高：</view>
+  <view wx:if="{{status == 0}}" class="item_title" style="display: flex;flex-direction: row;" >
+    <input style="width: 150rpx;background-color: white;color:gray; margin-right: 20rpx;" placeholder="" value="{{submitData.name}}" bindinput="setName" /> cm
+  </view>
+  <view style="height: 70rpx;margin-top: 50rpx;" class="item_title">营员体重：</view>
+  <view wx:if="{{status == 0}}" class="item_title" style="display: flex;flex-direction: row;" >
+    <input style="width: 150rpx;background-color: white;color:gray; margin-right: 20rpx;" placeholder="" value="{{submitData.name}}" bindinput="setName" />kg
+  </view>
+  <view style="height: 70rpx;margin-top: 50rpx;display: flex;flex-direction: row;" class="item_title">
+    营员身份证号：
+    <view style="font-size: 10pt" >（请仔细填写，我们用于购买营内保险）</view>
+  </view>
+  <view wx:if="{{status == 0}}" class="item_title" >
+    <input style="width: 300rpx;background-color: white;color:gray" placeholder="请填写姓名" value="{{submitData.name}}" bindinput="setName" />
+  </view>
+  <view style="height: 70rpx;margin-top: 50rpx;" class="item_title">联系方式：（请填写2个）</view>
+  <view wx:if="{{status == 0}}" class="item_title" >
+    <view style="display: flex;flex-direction: row;">
+      <input placeholder="姓名1" style="width: 200rpx;background-color: white;color:gray" />
+      <input style="margin-left: 50rpx;width: 400rpx;background-color: white;color:gray" placeholder="电话1" /> 
+    </view>
+    <view style="display: flex;flex-direction: row;margin-top:20rpx">
+      <input placeholder="姓名2" style="width: 200rpx;background-color: white;color:gray" />
+      <input style="margin-left: 50rpx;width: 400rpx;background-color: white;color:gray" placeholder="电话2" /> 
+    </view>
+    
+  </view>
+  
+
+
+
+
+  
+  
+
+  <view class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">有无身体、心理疾病？</b></view>
+  <view  class="item_title">
+    <radio-group wx:if="{{status == 0}}" id="allergy" bindchange="setRadio">
+      <radio style="color: white;width: 200rpx;" value="0" checked="{{submitData.is_allergy == 0}}" >否</radio>
+      <radio style="color: white;" value="1" checked="{{submitData.is_allergy == 1}}" >是</radio>
+    </radio-group>
+    <b wx:else style="color: white;">{{submitData.is_allergy == 1?'是':'否'}}</b>
+  </view>
+  
+  <view wx:if="{{submitData.is_allergy == 1}}" class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">请详细说明您孩子对什么过敏：</b></view>
+  <view class="item_title" wx:if="{{submitData.is_allergy == 1}}" >
+    <textarea wx:if="{{status == 0}}" id="txtAllergy" bindinput="setText" style="height: 150rpx;width: 700rpx;background-color: white;" placeholder="50字以内" value="{{submitData.allergy}}" ></textarea>
+    <b wx:else style="color: white;">{{submitData.allergy}}</b>
+  </view>
+
+  <view class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">有无过敏史？</b></view>
+  <view class="item_title">
+    <radio-group wx:if="{{status == 0}}" id="drug" bindchange="setRadio">
+      <radio style="color: white;width: 200rpx;" checked="{{submitData.use_drug == 0}}" value="0" >无</radio>
+      <radio style="color: white;" checked="{{submitData.use_drug == 1}}" value="1" >有</radio>
+    </radio-group>
+    <b wx:else style="color: white;">{{submitData.use_drug == 1?'有':'无'}}</b>
+  </view>
+  <view wx:if="{{submitData.use_drug == 1}}" class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">请详细说明您孩子的病情及所用药物：</b></view>
+  <view class="item_title" wx:if="{{submitData.use_drug == 1}}"  >
+    <textarea wx:if="{{status == 0}}" id="txtDrug" bindinput="setText" style="height: 200rpx;width: 700rpx;background-color: white;" placeholder="150字以内" value="{{submitData.drugs_memo}}"></textarea>
+    <b wx:else style="color: white;">{{submitData.drugs_memo}}</b>
+  </view>
+
+
+
+
+  <view wx:if="{{status == 0}}" style="margin-top: 100rpx;">
+    <button style="border-radius: 50rpx;color:white; font:bolder; background-color: #f2ab40;"  bindtap="save" > 保 存 </button>
+  </view>
+  <view wx:if="{{status == 1}}" style="margin-top: 100rpx;" style="display: flex;flex-direction: row;">
+    <button style="border-radius: 50rpx;color:white; font:bolder; background-color: #f2ab40;"  bindtap="mod" >返回修改</button>
+    <button style="border-radius: 50rpx;color:white; font:bolder; background-color: #f2ab40;"  bindtap="submit" >确认提交</button>
+  </view>
+  <view style="height: 200rpx;"></view>
+</view>
