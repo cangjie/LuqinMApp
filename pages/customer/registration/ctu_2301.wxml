@@ -12,86 +12,104 @@
   </view>
   <view style="height: 70rpx;margin-top: 50rpx;" class="item_title">营员姓名：</view>
   <view wx:if="{{status == 0}}" class="item_title" >
-    <input style="width: 300rpx;background-color: white;color:gray" placeholder="请填写姓名" value="{{submitData.name}}" bindinput="setName" />
+    <input id="child_name" style="width: 300rpx;background-color: white;color:gray" placeholder="请填写姓名" value="{{submitData.child_name}}" bindinput="input" />
   </view>
+  <view wx:else class="item_title" ><b style="color: white;">{{submitData.child_name}}</b></view>
   <view style="height: 70rpx;margin-top: 50rpx;" class="item_title">营员性别：</view>
   <view wx:if="{{status == 0}}" class="item_title" >
-    <radio-group>
-      <radio style="margin-left: 30rpx;" >男</radio><radio style="margin-left: 30rpx;" >女</radio>
+    <radio-group id="child_gender" bindchange="input">
+      <radio style="margin-left: 30rpx;" checked="{{submitData.child_gender=='男'}}" value="男" >男</radio>
+      <radio style="margin-left: 30rpx;" checked="{{submitData.child_gender=='女'}}" value="女" >女</radio>
     </radio-group>
   </view>
+  <view wx:else class="item_title" ><b style="color: white;">{{submitData.child_gender}}</b></view>
   <view style="height: 70rpx;margin-top: 50rpx;" class="item_title">营员年龄：</view>
   <view wx:if="{{status == 0}}" class="item_title" >
-    <input style="background-color: white;color:gray; width:150rpx"  placeholder="几周岁？" value="{{submitData.name}}" bindinput="setName" />
+    <input id="child_age" style="background-color: white;color:gray; width:150rpx"  placeholder="几周岁？" value="{{submitData.child_age}}" bindinput="input" />
   </view>
   <view style="height: 70rpx;margin-top: 50rpx;" class="item_title">所在省市：</view>
   <view wx:if="{{status == 0}}" class="item_title" >
-    <picker mode="region" level="province" >
-      <picker-view>请选择。。。</picker-view>
+    <picker mode="region" level="province" bindchange="input" id="region" >
+      <picker-view>
+        {{(submitData.region == '' || submitData.region == undefined) ? '请选择……': submitData.region}}
+      </picker-view>
     </picker> 
   </view>
+  <view wx:else class="item_title" ><b style="color: white;">{{submitData.region}}</b></view>
   <view style="height: 70rpx;margin-top: 50rpx;" class="item_title">营员身高：</view>
   <view wx:if="{{status == 0}}" class="item_title" style="display: flex;flex-direction: row;" >
-    <input style="width: 150rpx;background-color: white;color:gray; margin-right: 20rpx;" placeholder="" value="{{submitData.name}}" bindinput="setName" /> cm
+    <input style="width: 150rpx;background-color: white;color:gray; margin-right: 20rpx;" placeholder="" value="{{submitData.child_length}}" bindinput="input" id="child_length" /> cm
   </view>
+  <view wx:else class="item_title" ><b style="color: white;">{{submitData.child_length}}</b></view>
+
+
   <view style="height: 70rpx;margin-top: 50rpx;" class="item_title">营员体重：</view>
   <view wx:if="{{status == 0}}" class="item_title" style="display: flex;flex-direction: row;" >
-    <input style="width: 150rpx;background-color: white;color:gray; margin-right: 20rpx;" placeholder="" value="{{submitData.name}}" bindinput="setName" />kg
+    <input style="width: 150rpx;background-color: white;color:gray; margin-right: 20rpx;" placeholder="" value="{{submitData.child_weight}}" bindinput="input" id="child_weight" />kg
   </view>
+  <view wx:else class="item_title" ><b style="color: white;">{{submitData.child_weight}}</b></view>
+
+
   <view style="height: 70rpx;margin-top: 50rpx;display: flex;flex-direction: row;" class="item_title">
     营员身份证号：
     <view style="font-size: 10pt" >（请仔细填写，我们用于购买营内保险）</view>
   </view>
   <view wx:if="{{status == 0}}" class="item_title" >
-    <input style="width: 300rpx;background-color: white;color:gray" placeholder="请填写姓名" value="{{submitData.name}}" bindinput="setName" />
+    <input style="width: 400rpx;background-color: white;color:gray" placeholder="" value="{{submitData.child_id_no}}" bindinput="input" id="child_id_no" />
   </view>
+  <view wx:else class="item_title" ><b style="color: white;">{{submitData.child_id_no}}</b></view>
+
+
   <view style="height: 70rpx;margin-top: 50rpx;" class="item_title">联系方式：（请填写2个）</view>
   <view wx:if="{{status == 0}}" class="item_title" >
     <view style="display: flex;flex-direction: row;">
-      <input placeholder="姓名1" style="width: 200rpx;background-color: white;color:gray" />
-      <input style="margin-left: 50rpx;width: 400rpx;background-color: white;color:gray" placeholder="电话1" /> 
+      <input placeholder="姓名1" style="width: 200rpx;background-color: white;color:gray" id="contact_pri_name" bindinput="input" value="{{submitData.contact_pri_name}}" />
+      <input style="margin-left: 50rpx;width: 400rpx;background-color: white;color:gray" id="contact_pri_cell" bindinput="input" placeholder="电话1" value="{{submitData.contact_pri_cell}}"  /> 
     </view>
     <view style="display: flex;flex-direction: row;margin-top:20rpx">
-      <input placeholder="姓名2" style="width: 200rpx;background-color: white;color:gray" />
-      <input style="margin-left: 50rpx;width: 400rpx;background-color: white;color:gray" placeholder="电话2" /> 
+      <input placeholder="姓名2" style="width: 200rpx;background-color: white;color:gray" id="contact_sec_name" bindinput="input" value="{{submitData.contact_sec_name}}" />
+      <input style="margin-left: 50rpx;width: 400rpx;background-color: white;color:gray" id="contact_sec_cell" bindinput="input" placeholder="电话2" value="{{submitData.contact_sec_cell}}" /> 
+    </view>
+  </view>
+
+  <view wx:else class="item_title" >
+    <view style="display: flex;flex-direction: row;">
+      <view class="item_title" ><b style="color: white;">{{submitData.contact_pri_name}}</b></view>
+      <view class="item_title" ><b style="color: white;">{{submitData.contact_pri_cell}}</b></view>
+    </view>
+    <view style="display: flex;flex-direction: row;margin-top:20rpx">
+      <view class="item_title" ><b style="color: white;">{{submitData.contact_sec_name}}</b></view>
+      <view class="item_title" ><b style="color: white;">{{submitData.contact_sec_cell}}</b></view>
     </view>
     
   </view>
   
-
-
-
-
-  
-  
-
   <view class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">有无身体、心理疾病？</b></view>
   <view  class="item_title">
-    <radio-group wx:if="{{status == 0}}" id="allergy" bindchange="setRadio">
-      <radio style="color: white;width: 200rpx;" value="0" checked="{{submitData.is_allergy == 0}}" >否</radio>
-      <radio style="color: white;" value="1" checked="{{submitData.is_allergy == 1}}" >是</radio>
+    <radio-group wx:if="{{status == 0}}" id="is_disease" bindchange="input">
+      <radio style="color: white;width: 200rpx;" value="0" checked="{{submitData.is_disease == undefined || submitData.is_disease == 0}}" >否</radio>
+      <radio style="color: white;" value="1" checked="{{submitData.is_disease != undefined && submitData.is_disease == 1}}" >是</radio>
     </radio-group>
-    <b wx:else style="color: white;">{{submitData.is_allergy == 1?'是':'否'}}</b>
+  </view>
+  <view wx:if="{{submitData.is_disease == 1}}" class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">请详细说明您孩子有什么疾病：</b></view>
+  <view class="item_title" wx:if="{{submitData.is_disease == 1}}" >
+    <textarea id="child_disease" wx:if="{{status == 0}}"  bindinput="input" style="height: 150rpx;width: 700rpx;background-color: white;color:gray" placeholder="50字以内" value="{{submitData.child_disease}}" ></textarea>
+    <b wx:else style="color: white;">{{submitData.child_disease}}</b>
   </view>
   
-  <view wx:if="{{submitData.is_allergy == 1}}" class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">请详细说明您孩子对什么过敏：</b></view>
-  <view class="item_title" wx:if="{{submitData.is_allergy == 1}}" >
-    <textarea wx:if="{{status == 0}}" id="txtAllergy" bindinput="setText" style="height: 150rpx;width: 700rpx;background-color: white;" placeholder="50字以内" value="{{submitData.allergy}}" ></textarea>
-    <b wx:else style="color: white;">{{submitData.allergy}}</b>
-  </view>
 
   <view class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">有无过敏史？</b></view>
   <view class="item_title">
-    <radio-group wx:if="{{status == 0}}" id="drug" bindchange="setRadio">
-      <radio style="color: white;width: 200rpx;" checked="{{submitData.use_drug == 0}}" value="0" >无</radio>
-      <radio style="color: white;" checked="{{submitData.use_drug == 1}}" value="1" >有</radio>
+    <radio-group wx:if="{{status == 0}}" id="is_allergy" bindchange="input">
+      <radio style="color: white;width: 200rpx;" checked="{{submitData.is_allergy == undefined || submitData.is_allergy == 0}}" value="0" >无</radio>
+      <radio style="color: white;" checked="{{submitData.is_allergy != undefined && submitData.is_allergy == 1}}" value="1" >有</radio>
     </radio-group>
-    <b wx:else style="color: white;">{{submitData.use_drug == 1?'有':'无'}}</b>
+    <b wx:else style="color: white;">{{submitData.is_allergy == 1?'是':'否'}}</b>
   </view>
-  <view wx:if="{{submitData.use_drug == 1}}" class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">请详细说明您孩子的病情及所用药物：</b></view>
-  <view class="item_title" wx:if="{{submitData.use_drug == 1}}"  >
-    <textarea wx:if="{{status == 0}}" id="txtDrug" bindinput="setText" style="height: 200rpx;width: 700rpx;background-color: white;" placeholder="150字以内" value="{{submitData.drugs_memo}}"></textarea>
-    <b wx:else style="color: white;">{{submitData.drugs_memo}}</b>
+  <view wx:if="{{submitData.is_allergy == 1}}" class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">请详细说明您孩子对什么过敏：</b></view>
+  <view class="item_title" wx:if="{{submitData.is_allergy == 1}}" >
+    <textarea id="child_allergy" wx:if="{{status == 0}}"  bindinput="input" style="height: 150rpx;width: 700rpx;background-color: white;color:gray" placeholder="50字以内" value="{{submitData.child_allergy}}" ></textarea>
+    <b wx:else style="color: white;">{{submitData.child_allergy}}</b>
   </view>
 
 

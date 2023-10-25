@@ -1,14 +1,5 @@
 {
   "description": "Project configuration file, more information: https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "packOptions": {
-    "ignore": [
-      {
-        "value": ".eslintrc.js",
-        "type": "file"
-      }
-    ],
-    "include": []
-  },
   "setting": {
     "urlCheck": true,
     "es6": true,
@@ -29,8 +20,6 @@
     "compileHotReLoad": false,
     "lazyloadPlaceholderEnable": false,
     "useMultiFrameRuntime": true,
-    "useApiHook": true,
-    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -50,9 +39,7 @@
     "condition": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.19.4",
   "appid": "wx34bd31c8bf72b589",
-  "projectname": "LuqinMApp",
   "condition": {
     "search": {
       "list": []
@@ -76,5 +63,16 @@
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
-  }
+  },
+  "libVersion": "2.19.4",
+  "packOptions": {
+    "ignore": [
+      {
+        "value": ".eslintrc.js",
+        "type": "file"
+      }
+    ],
+    "include": []
+  },
+  "projectname": "LuqinMApp"
 }
