@@ -1,4 +1,6 @@
 // pages/customer/registration/ctu_2301.js
+const app = getApp()
+const util = require('../../../utils/util')
 Page({
 
   /**
@@ -6,10 +8,26 @@ Page({
    */
   data: {
     status: 0,
+    /*
     submitData:{
+      child_name: '苍杰',
+      child_age: '45',
+      child_gender: '男',
+      region: '北京市/北京市/朝阳区',
+      child_length: '190',
+      child_weight: '100',
+      child_id_no: '110101197802093018',
+      contact_pri_name: '于娜',
+      contact_pri_cell: '18601197897',
+      contact_sec_name: '李悦',
+      contact_sec_cell: '18501097897',
       is_disease: 0,
-      is_allergy: 0
+      child_disease: '癫痫，晕车，艾滋病',
+      is_allergy: 0,
+      child_allergy: '茴香'
     }
+    */
+   submitData:{}
   },
 
   input(e){
@@ -72,6 +90,67 @@ Page({
         break
     }
     that.setData({submitData: submitData})
+  },
+
+  checkValid(){
+    //var valid = true
+    var message = ''
+    var that = this
+    var submitData = that.data.submitData
+    if (util.isBlank(submitData.child_name)){
+      message = '请填写孩子的姓名。'
+    }
+    else if (util.isBlank(submitData.child_gender)){
+      message = '请选择孩子的性别。'
+    }
+    else if (util.isBlank(submitData.child_age)){
+      message = '请填写孩子的年龄。'
+    }
+    else if (util.isBlank(submitData.region)){
+      message = '请选择您所在的省市。'
+    }
+    else if (util.isBlank(submitData.child_length)){
+      message = '请填写孩子的身高。'
+    }
+    else if (util.isBlank(submitData.child_weight)){
+      message = '请填写孩子的体重。'
+    }
+    else if (util.isBlank(submitData.child_id_no)){
+      message = '请填写孩子的身份证号码。'
+    }
+    else if (submitData.is_disease == 1 && util.isBlank(submitData.child_disease)){
+      message = '请告知孩子有何种疾病。'
+    }
+    else if (submitData.is_allergy == 1 && util.isBlank(submitData.child_allergy)){
+      message = '请说明孩子对什么过敏。'
+    }
+    else if (util.isBlank(submitData.contact_pri_name)){
+      message = '请填写首选联系人姓名。'
+    }
+    else if (util.isBlank(submitData.contact_pri_cell) || submitData.contact_pri_cell.length != 11){
+      message = '请正确填写首选联系人电话。'
+    }
+    else if (util.isBlank(submitData.contact_sec_name)){
+      message = '请填写备用联系人姓名。'
+    }
+    else if (util.isBlank(submitData.contact_sec_cell) || submitData.contact_sec_cell.length != 11){
+      message = '请正确填写备用联系人电话。'
+    }
+    else {
+      return true
+    }
+    wx.showToast({
+      title: message,
+      icon: 'none'
+    })
+    return false
+  },
+  save(){
+    var that = this
+    var valid = that.checkValid()
+    if (!valid){
+      return
+    }
   },
 
   /**

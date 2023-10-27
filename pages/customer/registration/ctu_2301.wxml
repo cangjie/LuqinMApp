@@ -27,6 +27,7 @@
   <view wx:if="{{status == 0}}" class="item_title" >
     <input id="child_age" style="background-color: white;color:gray; width:150rpx"  placeholder="几周岁？" value="{{submitData.child_age}}" bindinput="input" />
   </view>
+  <view wx:else class="item_title" ><b style="color: white;">{{submitData.child_age}}</b></view>
   <view style="height: 70rpx;margin-top: 50rpx;" class="item_title">所在省市：</view>
   <view wx:if="{{status == 0}}" class="item_title" >
     <picker mode="region" level="province" bindchange="input" id="region" >
@@ -87,9 +88,10 @@
   <view class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">有无身体、心理疾病？</b></view>
   <view  class="item_title">
     <radio-group wx:if="{{status == 0}}" id="is_disease" bindchange="input">
-      <radio style="color: white;width: 200rpx;" value="0" checked="{{submitData.is_disease == undefined || submitData.is_disease == 0}}" >否</radio>
-      <radio style="color: white;" value="1" checked="{{submitData.is_disease != undefined && submitData.is_disease == 1}}" >是</radio>
+      <radio style="color: white;width: 200rpx;" value="0" checked="{{submitData.is_disease == undefined || submitData.is_disease == 0}}" >无</radio>
+      <radio style="color: white;" value="1" checked="{{submitData.is_disease != undefined && submitData.is_disease == 1}}" >有</radio>
     </radio-group>
+    <b wx:else style="color: white;">{{submitData.is_disease == 1?'有':'无'}}</b>
   </view>
   <view wx:if="{{submitData.is_disease == 1}}" class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">请详细说明您孩子有什么疾病：</b></view>
   <view class="item_title" wx:if="{{submitData.is_disease == 1}}" >
@@ -104,7 +106,7 @@
       <radio style="color: white;width: 200rpx;" checked="{{submitData.is_allergy == undefined || submitData.is_allergy == 0}}" value="0" >无</radio>
       <radio style="color: white;" checked="{{submitData.is_allergy != undefined && submitData.is_allergy == 1}}" value="1" >有</radio>
     </radio-group>
-    <b wx:else style="color: white;">{{submitData.is_allergy == 1?'是':'否'}}</b>
+    <b wx:else style="color: white;">{{submitData.is_allergy == 1?'有':'无'}}</b>
   </view>
   <view wx:if="{{submitData.is_allergy == 1}}" class="item_title" style="height: 70rpx;margin-top: 50rpx;"><b style="color: white;">请详细说明您孩子对什么过敏：</b></view>
   <view class="item_title" wx:if="{{submitData.is_allergy == 1}}" >

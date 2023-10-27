@@ -24,7 +24,20 @@ const getQueryValue = (query, name) =>{
     return null;
 }
 
+const isBlank = (value)=>{
+  if (value==undefined){
+    return true
+  }
+  else if (isNaN(value) && value == ''){
+    return true
+  }
+  else{
+    return false
+  }
+}
+
 module.exports = {
   formatTime,
-  getQueryValue
+  getQueryValue,
+  isBlank
 }
