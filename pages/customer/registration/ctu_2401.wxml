@@ -119,6 +119,8 @@
 
   <view wx:if="{{status == 0}}" style="margin-top: 100rpx;">
     <button style="border-radius: 50rpx;color:white; font:bolder; background-color: #f2ab40;"  bindtap="save" > 保 存 </button>
+    <view style="height:  100rpx;" ></view>
+    <button style="border-radius: 50rpx;color:white; font:bolder; background-color: #f2ab40;"  bindtap="back" > 返 回 </button>
   </view>
   <view wx:if="{{status == 1}}" style="margin-top: 100rpx;" style="display: flex;flex-direction: row;">
     <button style="border-radius: 50rpx;color:white; font:bolder; background-color: #f2ab40;"  bindtap="mod" >返回修改</button>

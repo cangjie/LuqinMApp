@@ -1,0 +1,23 @@
+<view>
+  <image style="width: 750rpx;margin-bottom: 0rpx;padding-bottom: 0rpx;" mode="widthFix" src="http://mini.luqinwenda.com/images/ctu_2301.jpg"></image>
+  <view style="text-align: center;font-size: 13pt;font:bold">【报名表】少年纪录片制作人</view>
+  <view style="text-align: center;font-size: 10pt;">（2024年1月25日-2月4日（11天））</view>
+  <view style="height: 50rpx; border-style: none; border-bottom-style: dotted; border-color: white;border-width: 1rpx;margin-bottom: 30rpx;"></view>
+  <block wx:for="{{regList}}" id="{{item.id}}" bindtap="gotoDetail" >
+    <view style="display: flex;flex-direction: row; margin-top: 20rpx;" id="{{item.id}}" bindtap="gotoDetail" >
+      <view class="left_col" style="width: 15%;" >姓名：</view>
+      <view class="right_col" style="width: 15%;" >{{item.child_name}}</view>
+      <view class="left_col" >年龄：</view>
+      <view class="right_col" >{{item.child_age}}</view>
+    </view>
+    <view style="display: flex;flex-direction: row;" id="{{item.id}}" bindtap="gotoDetail" >
+      <view class="left_col" style="width: 15%;" >性别：</view>
+      <view class="right_col" style="width: 15%;" >{{item.child_gender}}</view>
+      <view class="left_col" >身份证：</view>
+      <view class="right_col" >{{item.child_id_no}}</view>
+    </view>
+    <view style="height: 20rpx; border-style: none; border-bottom-style: dotted; border-color: white;border-width: 1rpx;"></view>
+  </block>
+  <view style="height: 200rpx;"></view>
+  <button style="border-radius: 50rpx;color:white; font:bolder; background-color: #f2ab40;"  bindtap="reg" > 填 写 报 名 表 </button>
+</view>

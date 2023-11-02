@@ -13,7 +13,8 @@
     "pages/customer/sign_up/british_2023",
     "pages/customer/sign_up/health_announce",
     "pages/customer/sign_up/british_suits",
-    "pages/customer/registration/ctu_2301"
+    "pages/customer/registration/ctu_2401",
+    "pages/customer/registration/ctu_2401_list"
   ],
   "window": {
     "backgroundTextStyle": "light",

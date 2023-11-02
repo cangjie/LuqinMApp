@@ -27,8 +27,15 @@ Page({
       child_allergy: '茴香'
     }
     */
-   submitData:{}
+   submitData:{
+    camp_name: 'ctu_2401'
+   }
   },
+
+  back(){
+    wx.navigateBack()
+  },
+
 
   input(e){
     console.log('input', e)
@@ -151,12 +158,107 @@ Page({
     if (!valid){
       return
     }
+    that.setData({status: 1})
+  },
+
+  mod(){
+    var that = this
+    that.setData({status: 0})
+  },
+
+  submit(){
+    var that = this
+    var submitData = that.data.submitData
+    submitData.camp_name = 'ctu_2401'
+    var postUrl = app.globalData.requestPrefix + 'CampRegistration/NewRegister?sessionKey=' + encodeURIComponent(app.globalData.sessionKey)
+    var msg = '您的报名表我们已经收到。'
+    if (that.data.id != undefined && !isNaN(that.data.id)){
+      postUrl = app.globalData.requestPrefix + 'CampRegistration/ModRegister?sessionKey=' + encodeURIComponent(app.globalData.sessionKey)
+      msg = '您的报名表变更已经保存。'
+    }
+    wx.request({
+      url: postUrl,
+      method: 'POST',
+      data: submitData,
+      success:(res)=>{
+        if (res.statusCode != 200){
+          return
+        }
+        console.log('add new', res)
+        /*
+        wx.showToast({
+          title: msg,
+          icon: 'none',
+          duration: 4000,
+          mask: true
+          
+          
+        })
+        */
+       wx.showModal({
+         title: msg,
+         content: '',
+         showCancel: false,
+         complete: (res) => {
+           if (res.cancel) {
+             
+           }
+       
+           if (res.confirm) {
+            wx.navigateTo({
+              url: 'ctu_2401_list',
+            })
+           }
+         }
+       })
+        
+      }
+    })
+  },
+
+  init(){
+    var that = this
+    var getUrl = app.globalData.requestPrefix + 'CampRegistration/GetRegistration/' + that.data.id + '?sessionKey=' + encodeURIComponent(app.globalData.sessionKey)
+    wx.request({
+      url: getUrl,
+      method: 'GET',
+      success:(res)=>{
+        console.log('camp reg', res)
+        if (res.statusCode != 200){
+          return
+        }
+        var submitData = res.data
+        if (util.isBlank(submitData.child_allergy)){
+          submitData.is_allergy = 0
+        }
+        else{
+          submitData.is_allergy = 1
+        }
+        if (util.isBlank(submitData.child_disease)){
+          submitData.is_disease = 0
+        }
+        else{
+          submitData.is_disease = 1
+        }
+        that.setData({submitData: submitData})
+      }
+    })
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
+    var that = this
+    
+    app.loginPromise.then(function(resolve){
+      console.log('session key', app.globalData.sessionKey)
+      if (options.id != undefined && options.id != null && !isNaN(options.id)){
+        that.setData({id: options.id})
+        that.init()
+      }
+
+    })
 
   },
 

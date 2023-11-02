@@ -5,8 +5,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "ctu_2301",
-          "pathName": "pages/customer/registration/ctu_2301",
+          "name": "ctu_2401",
+          "pathName": "pages/customer/registration/ctu_2401_list",
           "query": "",
           "launchMode": "default",
           "scene": null

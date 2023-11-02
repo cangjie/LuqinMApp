@@ -25,10 +25,10 @@ const getQueryValue = (query, name) =>{
 }
 
 const isBlank = (value)=>{
-  if (value==undefined){
+  if (value == undefined || value == null){
     return true
   }
-  else if (isNaN(value) && value == ''){
+  else if (value == ''){
     return true
   }
   else{

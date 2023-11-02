@@ -42,6 +42,7 @@ App({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         var app = getApp()
         console.log("Login info:", res)
+        //return
         var loginUrl = app.globalData.requestPrefix + 'MiniAppHelper/Login/' + encodeURIComponent(res.code)
         wx.request({
           url: loginUrl,

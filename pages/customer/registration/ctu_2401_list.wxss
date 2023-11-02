@@ -1,0 +1,32 @@
+/* pages/customer/sign_up/health_announce.wxss */
+Page{
+  background-color: #8f4024;
+  color: white;
+}
+view{
+  background-color: #8f4024;
+  color:white;
+  /*margin-left: 20rpx;*/
+  
+}
+checkbox{
+  width: 200rpx;
+  color: white;
+  margin-top: 20rpx;
+}
+radio{
+  margin-top: 20rpx;
+}
+.item_title{
+  margin-left: 20rpx;
+}
+.left_col{
+  width: 20%;
+  margin-right: 0rpx;
+  text-align: right;
+}
+.right_col{
+  width: 30%;
+  margin-left: 0rpx;
+  text-align: left;
+}
