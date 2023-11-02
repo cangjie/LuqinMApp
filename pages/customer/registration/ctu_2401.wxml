@@ -30,7 +30,7 @@
   <view wx:else class="item_title" ><b style="color: white;">{{submitData.child_age}}</b></view>
   <view style="height: 70rpx;margin-top: 50rpx;" class="item_title">所在省市：</view>
   <view wx:if="{{status == 0}}" class="item_title" >
-    <picker mode="region" level="province" bindchange="input" id="region" >
+    <picker mode="region" level="region" bindchange="input" id="region" >
       <picker-view>
         {{(submitData.region == '' || submitData.region == undefined) ? '请选择……': submitData.region}}
       </picker-view>
