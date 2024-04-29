@@ -11,14 +11,14 @@
   <view style="height: 1500rpx;margin-left: 20rpx;margin-right: 15rpx;" >
     <view style="height: 70rpx;margin-top: 50rpx;" class="item_title"><b style="color: white;">孩子姓名：</b></view>
     <view wx:if="{{status == 0}}" class="item_title" style="display: flex;flex-direction: row;" >
-      <view style="color:red; text-align: right;width: 30rpx;">*</view><input style="height: 80rpx;width: 300rpx;background-color: white;" placeholder="请填写姓名" value="{{name}}" bindinput="setName" />
+      <view style="color:red; text-align: right;width: 30rpx;margin-top: 20rpx;">*</view><input style="height: 80rpx;width: 300rpx;background-color: white;" placeholder="请填写姓名" value="{{name}}" bindinput="setName" />
     </view>
     <view wx:else class="item_title" ><b style="color: white;">{{name}}</b></view>
     <view style="height: 70rpx;margin-top: 50rpx;" class="item_title"><b style="color: white;">城市：</b></view>
     <view wx:if="{{status == 0}}" class="item_title" >
-      <Select   title="" options="{{cityList}}" isRequired="true" bind:mySelectItem='onSelectItem' name='formkey' showkey='name' />
+      <Select selectedValue="{{city}}"  title="" options="{{cityList}}" isRequired="true" bind:mySelectItem='onSelectItem' name='formkey' showkey='name' />
     </view>
-    <view wx:else class="item_title" ><b style="color: white;">{{cityList[citySelectedIndex]}}</b></view>
+    <view wx:else class="item_title" ><b style="color: white;">{{city}}</b></view>
     <view style="height: 70rpx;margin-top: 50rpx;" class="item_title"><b style="color: white;">其他要求：</b></view>
     <view wx:if="{{status == 0}}" class="item_title" style="display: flex;flex-direction: row;" >
       <view style="width: 30rpx;" ></view>

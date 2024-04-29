@@ -20,6 +20,9 @@ Component({
     //外部传递的动态变量
     showkey: {
       type: String
+    },
+    selectedValue: {
+      type:String
     }
   },
 
@@ -31,13 +34,34 @@ Component({
    * 组件的方法列表
    */
   lifetimes: {
+    
+    ready: function(){
+      var key = this.properties.showkey
+      if (this.properties.selectedValue != undefined 
+        && this.properties.selectedValue != null 
+        && this.properties.selectedValue != ''){
+          for(var i = 0; i < this.properties.options.length; i++){
+            if (this.properties.selectedValue == this.properties.options[i][key]){
+              this.setData({
+                value: this.properties.options[i][key] //默认选中第一个
+                
+              })
+              break
+            }
+          }
+        }
+    },
+
     attached: function() {
       var key = this.properties.showkey
       this.setData({
         value: this.properties.options[0][key] //默认选中第一个
+        
       })
+   
     },
   },
+  
   methods: {
     selectToggle: function(e) {
       this.setData({
