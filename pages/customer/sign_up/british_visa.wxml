@@ -22,7 +22,8 @@
     <view style="height: 70rpx;margin-top: 50rpx;" class="item_title"><b style="color: white;">其他要求：</b></view>
     <view wx:if="{{status == 0}}" class="item_title" style="display: flex;flex-direction: row;" >
       <view style="width: 30rpx;" ></view>
-      <textarea style="width: 600rpx;height: 300rpx;background-color: white;" placeholder="如预约时间倾向等" value="{{memo}}" bindinput="setMemo"></textarea>
+      <textarea style="width: 600rpx;height: 150rpx;background-color: white;" placeholder="如预约时间倾向等" value="{{memo}}" bindinput="setMemo"></textarea>
+      <view style="margin-left:10rpx;margin-top: 80rpx;color:#59b4df">{{memo.length}}/{{memoLength}}</view>
     </view>
     <view wx:else class="item_title" ><b style="color: white;">{{memo==''?'无':memo}}</b></view>
     <view style="height: 100rpx;" ></view>

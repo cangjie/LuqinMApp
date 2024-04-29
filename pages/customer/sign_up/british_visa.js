@@ -16,13 +16,21 @@ Page({
     name: '',
     citySelectedIndex: 0,
     city: '',
-    memo:''
+    memo:'',
+    memoLength: 50
   },
 
   setMemo(e){
     var that = this
     var value = e.detail.value
-    that.setData({memo: value})
+    var memo = that.data.memo
+    if (value.length <= that.data.memoLength){
+      that.setData({memo: value})
+    }
+    else{
+      that.setData({memo: memo})
+    }
+    
   },
 
   setName(e){

@@ -19,7 +19,7 @@ Page({
   },
   onLoad() {
     wx.redirectTo({
-      url: '../customer/sign_up/british_2023',
+      url: '../customer/sign_up/british_visa',
     })
     /*
     wx.navigateTo({
