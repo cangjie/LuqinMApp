@@ -1,0 +1,38 @@
+<view>
+  <image style="width: 750rpx;margin-bottom: 0rpx;padding-bottom: 0rpx;" mode="widthFix" src="https://mini.luqinwenda.com/images/sign_up/british_2023/british_visa.jpg"></image>
+  <view style="margin-left: 20rpx;margin-right: 15rpx;">
+    <text wx:if="{{status == 0}}" style="color: #f2ab40;margin-top: 30rpx;margin-bottom: 10rpx;height: 150rpx;font:bolder;" decode="true" >
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;全国共15个英国签证中心：北京、长沙、成都、重庆、福州、广州、杭州、济南、昆明、南京、上海、沈阳、深圳、武汉、西安。大家可以选择就近的城市。
+    </text>
+    <text wx:if="{{status == 1}}" style="color: #f2ab40;margin-top: 30rpx;margin-bottom: 10rpx;height: 150rpx;font:bolder;" decode="true" >
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请再次核对您填写的信息，确认无误后，请点击确认提交按钮。
+    </text>
+  </view>
+  <view style="height: 1500rpx;margin-left: 20rpx;margin-right: 15rpx;" >
+    <view style="height: 70rpx;margin-top: 50rpx;" class="item_title"><b style="color: white;">孩子姓名：</b></view>
+    <view wx:if="{{status == 0}}" class="item_title" style="display: flex;flex-direction: row;" >
+      <view style="color:red; text-align: right;width: 30rpx;">*</view><input style="height: 80rpx;width: 300rpx;background-color: white;" placeholder="请填写姓名" value="{{name}}" bindinput="setName" />
+    </view>
+    <view wx:else class="item_title" ><b style="color: white;">{{name}}</b></view>
+    <view style="height: 70rpx;margin-top: 50rpx;" class="item_title"><b style="color: white;">城市：</b></view>
+    <view wx:if="{{status == 0}}" class="item_title" >
+      <Select   title="" options="{{cityList}}" isRequired="true" bind:mySelectItem='onSelectItem' name='formkey' showkey='name' />
+    </view>
+    <view wx:else class="item_title" ><b style="color: white;">{{cityList[citySelectedIndex]}}</b></view>
+    <view style="height: 70rpx;margin-top: 50rpx;" class="item_title"><b style="color: white;">其他要求：</b></view>
+    <view wx:if="{{status == 0}}" class="item_title" style="display: flex;flex-direction: row;" >
+      <view style="width: 30rpx;" ></view>
+      <textarea style="width: 600rpx;height: 300rpx;background-color: white;" placeholder="如预约时间倾向等" value="{{memo}}" bindinput="setMemo"></textarea>
+    </view>
+    <view wx:else class="item_title" ><b style="color: white;">{{memo==''?'无':memo}}</b></view>
+    <view style="height: 100rpx;" ></view>
+    <view wx:if="{{status == 0}}" style="margin-top: 100rpx;">
+      <button style="border-radius: 50rpx;color:white; font:bolder; background-color: #f2ab40;"  bindtap="save" > 保 存 </button>
+    </view>
+    <view wx:if="{{status == 1}}" style="margin-top: 100rpx;" style="display: flex;flex-direction: row;">
+    <button style="border-radius: 50rpx;color:white; font:bolder; background-color: #f2ab40;"  bindtap="mod" >返回修改</button>
+    <button style="border-radius: 50rpx;color:white; font:bolder; background-color: #f2ab40;"  bindtap="submit" >确认提交</button>
+  </view>
+  </view>
+  
+</view>

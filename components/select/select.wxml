@@ -1,0 +1,13 @@
+<view class="view-item">
+  <text class='item-key'>{{title}}<text style="color:red" wx:if="{{isRequired}}">*</text></text>
+  <view class="view-select-container">
+    <view class='select-value' bindtap="selectToggle" style="background-color: white;">
+      <input value="{{value}}" name='{{name}}' disabled="{{true}}" style="background-color: white;" />
+      <image class='img-arrow' style="width:40rpx;height:40rpx" src='/images/drop_down.png' />
+    </view>
+    <view class="view-options" wx:if="{{showOptions}}">
+      <cover-view class='option-item' wx:for="{{options}}" data-index="{{index}}" bindtap="selectItem">{{item[showkey]}}</cover-view>
+    </view>
+    <view class="view-out" wx:if="{{showOptions}}" bindtap="hideSelect"></view>
+  </view>
+</view>

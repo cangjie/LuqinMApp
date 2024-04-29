@@ -1,0 +1,16 @@
+view{
+  background-color: #1D3671;
+  /*margin-left: 20rpx;*/
+  
+}
+checkbox{
+  width: 200rpx;
+  color: white;
+  margin-top: 20rpx;
+}
+radio{
+  margin-top: 20rpx;
+}
+.item_title{
+  margin-left: 20rpx;
+}

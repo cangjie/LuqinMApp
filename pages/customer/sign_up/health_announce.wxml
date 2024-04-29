@@ -1,5 +1,5 @@
 <view>
-  <image style="width: 750rpx;margin-bottom: 0rpx;padding-bottom: 0rpx;" mode="widthFix" src="http://mini.luqinwenda.com/images/sign_up/british_2023/health.png"></image>
+  <image style="width: 750rpx;margin-bottom: 0rpx;padding-bottom: 0rpx;" mode="widthFix" src="https://mini.luqinwenda.com/images/sign_up/british_2023/health.png"></image>
   <view style="margin-left: 20rpx;margin-right: 15rpx;">
     <text wx:if="{{status == 0}}" style="color: #f2ab40;margin-top: 30rpx;margin-bottom: 10rpx;height: 150rpx;font:bolder;" decode="true" >
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;尊敬的家长：您好！为了孩子的健康成长，避免在夏令营活动中出现意外，请您如实填写学生健康调查表，谢谢合作！

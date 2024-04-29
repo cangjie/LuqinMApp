@@ -14,7 +14,8 @@
     "pages/customer/sign_up/health_announce",
     "pages/customer/sign_up/british_suits",
     "pages/customer/registration/ctu_2401",
-    "pages/customer/registration/ctu_2401_list"
+    "pages/customer/registration/ctu_2401_list",
+    "pages/customer/sign_up/british_visa"
   ],
   "window": {
     "backgroundTextStyle": "light",

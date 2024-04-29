@@ -1,9 +1,25 @@
 {
-  "setting": {},
+  "setting": {
+    "compileHotReLoad": true
+  },
   "description": "Project configuration file, more information: https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
   "condition": {
     "miniprogram": {
       "list": [
+        {
+          "name": "select",
+          "pathName": "pages/customer/sign_up/select_test",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "british_visa",
+          "pathName": "pages/customer/sign_up/british_visa",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
         {
           "name": "ctu_2401",
           "pathName": "pages/customer/registration/ctu_2401_list",
@@ -40,13 +56,6 @@
           "scene": null
         },
         {
-          "name": "",
-          "pathName": "pages/index/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
           "name": "health",
           "pathName": "pages/customer/sign_up/health_announce",
           "query": "",
@@ -55,5 +64,6 @@
         }
       ]
     }
-  }
+  },
+  "projectname": "LuqinMApp"
 }
